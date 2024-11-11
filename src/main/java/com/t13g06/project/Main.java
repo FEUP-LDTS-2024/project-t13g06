@@ -1,4 +1,4 @@
-package com.t13g06.project;
+package com.Shad0wBD.hero;
 
 public class Main {
     public static void main(String[] args) {
