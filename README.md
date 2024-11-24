@@ -24,15 +24,14 @@ Enjoy playing this multiplayer game with your friends and challenge them, just b
 ## Planned Features
 
 - **Playable Characters** - the game will have two playable characters that can be controlled by pressing:
-    - _Player1_ : `A`, `D` and `W`
-    - _Player2_ : `LEFT`, `RIGHT` and `UP`
+    - _Player1_ : `A`, `D`, `W` and `S`
+    - _Player2_ : `LEFT`, `RIGHT`, `UP` and `DOWN`
 
-  to move left, right and to jump, respectively. In terms of catching and throwing the ball, each player will also have a designated key for that.
+  to move left, right, to jump and to catch/throw the ball, respectively. In terms of catching and throwing the ball, each player will also have a designated key for that.
 
 - **Main Menu** - the game will have a main menu when we first open the game. It has the following options:
     - `PLAY` : starts a "new" game
-    - `SETTINGS` : allows the players to control game settings
-    - `INSTRUCTIONS` : displays the instructions of the game as well as a brief explanation of what every power-up does
+    - `SETTINGS` : allows the players to control game settings and displays the instructions of the game as well as a brief explanation of what every power-up does
 
 - **Pause Menu** - the game will be able to be paused by pressing the escape key. Then the players will be able to resume, exit and restart the game and also, go to the game's settings
 
@@ -47,12 +46,37 @@ Enjoy playing this multiplayer game with your friends and challenge them, just b
     -  `Speed Up` : boosts the ball's velocity (making it harder for the players to catch it or avoid getting hit)
     -  `Slow Down` : reduces the ball's speed (making it easier for the player to catch it or avoid getting hit)
     -  `Turbo` : boosts the players jump capacity
+    -  `Shockwave` : doubles the ball's strength (duplicating the damage it gives to the player hit by it)
 
   being able to change the odds of the game if chosen correctly by each player
 
 - **Music & Sound Effects** - the game will have background music and sound effects, that can have their volume changed in the settings menu
 
 ## Mockups
+The following mockups ilustrate how we idealize the game's differente menus and the game's arena as well as details like the two characters and the power-ups:
+
+### Main Menu
+(with `PLAY` selected)
+
+![Captura de ecrã 2024-11-24 134914](https://github.com/user-attachments/assets/8ee3f088-fb67-4ed6-9e8a-da79707a4c64)
+
+(with `SETTINGS` selected)
+
+![Captura de ecrã 2024-11-24 134933](https://github.com/user-attachments/assets/28171de5-7ee7-41cd-a6ae-df3781f57585)
+
+### Settings Menu
+(with `SOUND EFFECTS VOLUME` selected)
+
+![Captura de ecrã 2024-11-24 225402](https://github.com/user-attachments/assets/37b2a0d8-7555-48ef-a621-f73fc677815f)
+
+(with `MUSIC VOLUME` selected)
+
+![Captura de ecrã 2024-11-24 225422](https://github.com/user-attachments/assets/509df3d8-1ffa-47d7-981d-3c84aa5b41fe)
+
+### Main Arena
+(including **characters** and **power-ups**)
+
+![Captura de ecrã 2024-11-24 210633](https://github.com/user-attachments/assets/5b6d9a51-b010-4263-9d40-2499d391861d)
 
 ## UML
 
