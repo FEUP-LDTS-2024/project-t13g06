@@ -1,10 +1,12 @@
 plugins {
+    id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 application {
-    mainClass = 'com.t13g06.project.Application'
+    mainClass = 'com.t13g06.project.Game'
 }
-group = 'com.project-t1306.project'
+group = 'com.t1306.project'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -14,9 +16,13 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    testImplementation 'net.jqwik:jqwik:1.5.1'
     implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeEngines('junit-jupiter', 'jqwik')
+    }
 }
