@@ -6,6 +6,7 @@ import com.t13g06.project.model.game.arena.Arena;
 import com.t13g06.project.model.game.elements.Element;
 import com.t13g06.project.viewer.Viewer;
 
+import java.io.IOException;
 import java.util.List;
 
 public class GameViewer extends Viewer<Arena> {

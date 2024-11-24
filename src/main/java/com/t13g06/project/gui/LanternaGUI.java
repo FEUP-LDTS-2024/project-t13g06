@@ -12,7 +12,9 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -84,6 +86,7 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawPlayer_1(Position position) {
         drawCharacter(position.getX(), position.getY(), 'O', "#FFD700");
+
     }
     @Override
     public void drawPlayer_2(Position position) {
