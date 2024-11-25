@@ -39,7 +39,7 @@ Enjoy playing this multiplayer game with your friends and challenge them, just b
 
 - **Collision Detection** - The game will detect collisions between the ball and the walls and platforms as well as between the ball and the players. When the ball collides with the players and they are not able to catch it, they lose a life and can, eventually, die ending the game
 
-- **Game Over/Winner Screen** - the game will show a Game Over/Winner Screen when one of the players dies, displaying who won the battle
+- **Winner Screen** - the game will show a Game Over/Winner Screen when one of the players dies, displaying who won the battle
 
 - **Power-ups** - the game will have power-ups that each player can collect. Each one of them has a different consequence, for a short period of time:
     -  `Freeze` : freezes the oponent player
@@ -53,7 +53,7 @@ Enjoy playing this multiplayer game with your friends and challenge them, just b
 - **Music & Sound Effects** - the game will have background music and sound effects, that can have their volume changed in the settings menu
 
 ## Mockups
-The following mockups ilustrate how we idealize the game's differente menus and the game's arena as well as details like the two characters and the power-ups:
+The following mockups ilustrate how we idealize the game's different menus and the game's arena as well as details like the two characters and the power-ups:
 
 ### Main Menu
 (with `PLAY` selected)
@@ -72,6 +72,32 @@ The following mockups ilustrate how we idealize the game's differente menus and 
 (with `MUSIC VOLUME` selected)
 
 ![Captura de ecrã 2024-11-24 225422](https://github.com/user-attachments/assets/509df3d8-1ffa-47d7-981d-3c84aa5b41fe)
+
+## Pause Screen
+(with `RESUME` selected)
+
+![Captura de ecrã 2024-11-25 093024](https://github.com/user-attachments/assets/bd047735-9fe9-4015-b00c-54d361262a6e)
+
+(with `RESTART` selected)
+
+![Captura de ecrã 2024-11-25 092648](https://github.com/user-attachments/assets/062eced7-2631-4c90-a50d-a23fe08584de)
+
+(with `EXIT` selected)
+
+![Captura de ecrã 2024-11-25 092732](https://github.com/user-attachments/assets/34d6bf4e-3184-4350-9a5b-f9acf51f3c2d)
+
+(with `SETTINGS` selected)
+
+![Captura de ecrã 2024-11-25 092835](https://github.com/user-attachments/assets/9ed52d1e-8bbf-492a-bb34-2fede53f79d0)
+
+## Winner Screen
+(when player1 wins)
+
+![Captura de ecrã 2024-11-25 094452](https://github.com/user-attachments/assets/ab97f7e0-ebf9-41e0-9c26-2484294a99c0)
+
+(when player2 wins)
+
+![Captura de ecrã 2024-11-25 095331](https://github.com/user-attachments/assets/b3e0bab5-27e5-4c0e-a1c5-c03476d3a2a9)
 
 ### Main Arena
 (including **characters** and **power-ups**)
