@@ -54,7 +54,7 @@ public class LanternaGUI implements GUI {
     }
 
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
+        URL resource = getClass().getClassLoader().getResource("fonts/RetroLeague.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
@@ -85,17 +85,17 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawPlayer_1(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'O', "#FFD700");
+        drawCharacter(position.getX(), position.getY(), 'À', "#FFD700");
 
     }
     @Override
     public void drawPlayer_2(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'T', "#FFD777");
+        drawCharacter(position.getX(), position.getY(), 'Ò', "#FFD777");
     }
 
     @Override
     public void drawBall(Position position) {
-        drawCharacter(position.getX(), position.getY(), '⚾', "#8B0000");
+        drawCharacter(position.getX(), position.getY(), '*', "#8B0000");
     }
 
     @Override
@@ -146,8 +146,8 @@ public class LanternaGUI implements GUI {
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
-        if (c == 'O' || c == 'T' || c == '⚾') tg.setForegroundColor(TextColor.Factory.fromString(color));
-        else tg.setBackgroundColor(TextColor.Factory.fromString(color));
+        if (c == 'Ò' || c == 'T' || c == '⚾') tg.setForegroundColor(TextColor.Factory.fromString(color));
+        if(c == ' ') tg.setBackgroundColor(TextColor.Factory.fromString(color));
         tg.putString(x, y + 1, "" + c);
     }
 
