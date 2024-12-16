@@ -69,11 +69,16 @@ public class Arena {
         this.walls = walls;
     }
 
-    public boolean isEmpty(Position position) {
+
+    public boolean isWall(Position position) {
         for (Wall wall : walls)
             if (wall.getPosition().equals(position))
-                return false;
-        return true;
+                return true;
+        return false;
+    }
+
+    public boolean isEmpty(Position position) {
+        return !isWall(position) && !isPowerUp(position);
     }
 
     public boolean isPowerUp(Position position) {

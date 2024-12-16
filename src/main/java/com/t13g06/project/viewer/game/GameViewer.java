@@ -22,9 +22,9 @@ public class GameViewer extends Viewer<Arena> {
         drawElement(gui, getModel().getPlayer_2(), new Player_2_Viewer());
         drawElement(gui, getModel().getBall(), new BallViewer());
 
-        gui.drawText(new Position(3, 3), "Player 1: " + getModel().getPlayer_1().getLives() + " lives", "#FFD700");
+        gui.drawText(new Position(4, 2), "Player 1: " + getModel().getPlayer_1().getLives() + " lives", "#FFD700");
 
-        gui.drawText(new Position(30, 3), "Player 2: " + getModel().getPlayer_2().getLives() + " lives", "#FFD700");
+        gui.drawText(new Position(34, 2), "Player 2: " + getModel().getPlayer_2().getLives() + " lives", "#FFD700");
     }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
