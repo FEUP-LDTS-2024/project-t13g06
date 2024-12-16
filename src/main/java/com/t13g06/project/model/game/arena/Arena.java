@@ -78,7 +78,7 @@ public class Arena {
     }
 
     public boolean isEmpty(Position position) {
-        return !isWall(position) && !isPowerUp(position);
+        return !isWall(position);
     }
 
     public boolean isPowerUp(Position position) {

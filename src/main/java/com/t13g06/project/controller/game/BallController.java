@@ -4,6 +4,9 @@ import com.t13g06.project.Game;
 import com.t13g06.project.gui.GUI;
 import com.t13g06.project.model.Position;
 import com.t13g06.project.model.game.arena.Arena;
+import com.t13g06.project.model.game.elements.PowerUps;
+
+import java.util.List;
 import java.util.Random;
 
 public class BallController extends GameController {
@@ -64,6 +67,6 @@ public class BallController extends GameController {
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
         // Move the ball on every step
-        moveBall();
+        if(!getModel().getBall().isFrozen())moveBall();
     }
 }

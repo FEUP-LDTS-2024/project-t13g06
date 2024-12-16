@@ -10,4 +10,5 @@ public class PowerUps extends Element {
     public String getPower() {
         return power;
     }
+
 }
