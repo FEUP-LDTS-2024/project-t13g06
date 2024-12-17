@@ -104,12 +104,21 @@ public class LoaderArenaBuilder extends ArenaBuilder {
     }
 
     @Override
-    protected Ball createBall() {
+    protected List<Ball> createBall() {
+        List<Ball> balls = new ArrayList<>();
+
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '⚾') return new Ball(x, y);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == '⚾') { // Check for the ball character
+                    balls.add(new Ball(x, y)); // Create and add the ball
+                }
+            }
         }
-        return null;
+
+        return balls; // Return the list of balls
     }
+
+
+
 }

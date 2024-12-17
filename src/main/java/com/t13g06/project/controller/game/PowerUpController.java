@@ -41,7 +41,7 @@ public class PowerUpController extends GameController {
 
     // Spawn a new random power-up at a valid position
     private void spawnRandomPowerUp() {
-        Position randomPosition = getRandomValidPosition();
+        Position randomPosition = arena.getRandomValidPosition();
         if (randomPosition != null) {
             String[] powerUpTypes = {"freeze", "speedUpBall", "slowDownEnemy", "strongerBall", "jumpBoost"};
             String randomPowerType = powerUpTypes[random.nextInt(powerUpTypes.length)];
@@ -50,34 +50,17 @@ public class PowerUpController extends GameController {
         }
     }
 
-    // Find a random valid position for spawning power-ups
-    private Position getRandomValidPosition() {
-        int width = arena.getWidth();
-        int height = arena.getHeight();
-        int maxAttempts = 100;
-
-        for (int i = 0; i < maxAttempts; i++) {
-            Position pos = new Position(random.nextInt(width), random.nextInt(height));
-            if (arena.isEmpty(pos) && !pos.equals(arena.getBall().getPosition()) &&
-                    !pos.equals(arena.getPlayer_1().getPosition()) &&
-                    !pos.equals(arena.getPlayer_2().getPosition())) {
-                return pos;
-            }
-        }
-        return null; // If no valid position is found after multiple attempts
-    }
-
     // Apply the effect of the power-up
     private void applyPowerUpEffect(String type, Player_1 player) {
         switch (type) {
             case "freeze":
-                freezeBall();
+                freezeBalls();
                 break;
             case "speedUpBall":
-                speedUpBall();
+                speedUpBalls();
                 break;
             case "slowDownEnemy":
-                slowDownBall();
+                slowDownBalls();
                 break;
             case "strongerBall":
                 // You can implement logic for stronger ball later
@@ -90,19 +73,25 @@ public class PowerUpController extends GameController {
         }
     }
 
-    private void freezeBall() {
-        Ball ball = arena.getBall();
-        ball.freeze(4000); // Freeze ball for 4 seconds
+    // Apply "freeze" power-up to all balls
+    private void freezeBalls() {
+        for (Ball ball : arena.getBalls()) {
+            ball.freeze(4000); // Freeze each ball for 4 seconds
+        }
     }
 
-    private void speedUpBall() {
-        Ball ball = arena.getBall();
-        ball.increaseSpeed();
+    // Apply "speed up" power-up to all balls
+    private void speedUpBalls() {
+        for (Ball ball : arena.getBalls()) {
+            ball.increaseSpeed();
+        }
     }
 
-    private void slowDownBall() {
-        Ball ball = arena.getBall();
-        ball.decreaseSpeed();
+    // Apply "slow down" power-up to all balls
+    private void slowDownBalls() {
+        for (Ball ball : arena.getBalls()) {
+            ball.decreaseSpeed();
+        }
     }
 
     @Override

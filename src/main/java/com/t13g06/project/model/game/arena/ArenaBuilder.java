@@ -11,7 +11,7 @@ public abstract class ArenaBuilder {
         arena.setPlayer_1(createPlayer_1());
         arena.setPlayer_2(createPlayer_2());
 
-        arena.setBall(createBall());
+        arena.setBalls(createBall());
 
         arena.setPowerUp(createPowerUp());
         arena.setWalls(createWalls());
@@ -30,5 +30,5 @@ public abstract class ArenaBuilder {
     protected abstract Player_1 createPlayer_1();
     protected abstract Player_2 createPlayer_2();
 
-    protected abstract Ball createBall();
+    protected abstract List<Ball> createBall();
 }

@@ -3,7 +3,9 @@ package com.t13g06.project.model.game.arena;
 import com.t13g06.project.model.Position;
 import com.t13g06.project.model.game.elements.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Arena {
     private final int width;
@@ -12,10 +14,12 @@ public class Arena {
     private Player_1 player_1;
     private Player_2 player_2;
 
-    private Ball ball;
+    private List<Ball> balls;
 
     private List<PowerUps> powerUp;
     private List<Wall> walls;
+
+    private Random random = new Random();
 
     public Arena(int width, int height) {
         this.width = width;
@@ -45,12 +49,17 @@ public class Arena {
         this.player_2 = player_2_;
     }
 
-    public Ball getBall() {
-        return ball;
+
+    public List<Ball> getBalls() {
+        return balls;
     }
 
-    public void setBall(Ball ball_) {
-        this.ball = ball_;
+    public void setBalls(List<Ball> balls_) {
+        this.balls = balls_;
+    }
+
+    public void addBall(Ball ball) {
+        this.balls.add(ball);
     }
 
     public List<PowerUps> getPowerUp() {
@@ -87,4 +96,30 @@ public class Arena {
                 return true;
         return false;
     }
+
+
+
+    // Find a random valid position for spawning power-ups
+    public Position getRandomValidPosition() {
+        int width = getWidth();
+        int height = getHeight();
+        int maxAttempts = 100;
+
+        for (int i = 0; i < maxAttempts; i++) {
+            Position pos = new Position(random.nextInt(width), random.nextInt(height));
+
+            // Check if position is empty and does not overlap with players or balls
+            boolean positionIsValid = isEmpty(pos)
+                    && !pos.equals(getPlayer_1().getPosition())
+                    && !pos.equals(getPlayer_2().getPosition())
+                    && getBalls().stream().noneMatch(ball -> ball.getPosition().equals(pos)); // Check against all balls
+
+            if (positionIsValid) {
+                return pos;
+            }
+        }
+        return null; // If no valid position is found after multiple attempts
+    }
+
+
 }

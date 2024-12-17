@@ -28,7 +28,7 @@ class ArenaViewerTest {
         arena.setPowerUp(Arrays.asList(new PowerUps(4, 5, "freeze"), new PowerUps(5, 6, "jumpBoost")));
         arena.setPlayer_1(new Player_1(5, 8));
         arena.setPlayer_2(new Player_2(5,12));
-        arena.setBall(new Ball(10,7));
+        //TODO DAR FIX arena.setBalls(new Ball(10,7));
     }
 
 

@@ -4,6 +4,7 @@ import com.t13g06.project.Game;
 import com.t13g06.project.gui.GUI;
 import com.t13g06.project.model.Position;
 import com.t13g06.project.model.game.arena.Arena;
+import com.t13g06.project.model.game.elements.Ball;
 import com.t13g06.project.model.game.elements.PowerUps;
 
 import java.util.List;
@@ -25,48 +26,79 @@ public class BallController extends GameController {
         yDirection = random.nextBoolean() ? 1 : -1; // Randomly choose up or down
     }
 
-    public void moveBall() {
-        Position currentPosition = getModel().getBall().getPosition();
-        Position nextPosition = new Position(
-                currentPosition.getX() + xDirection,
-                currentPosition.getY() + yDirection
-        );
+    public void moveBalls() {
+        List<Ball> balls = getModel().getBalls();
 
-        boolean hitWallX = getModel().isWall(new Position(nextPosition.getX(), currentPosition.getY()));
-        boolean hitWallY = getModel().isWall(new Position(currentPosition.getX(), nextPosition.getY()));
+        for (int i = 0; i < balls.size(); i++) {
+            Ball ball = balls.get(i);
+            if (ball.isFrozen()) continue;
 
-        // Reflect directions based on wall collisions
-        if (hitWallX) {
-            xDirection *= -1; // Reflect horizontal direction
-        }
-        if (hitWallY) {
-            yDirection *= -1; // Reflect vertical direction
-        }
+            Position currentPosition = ball.getPosition();
+            Position nextPosition = new Position(
+                    currentPosition.getX() + ball.getXDirection(),
+                    currentPosition.getY() + ball.getYDirection()
+            );
 
-        // If both directions are blocked (corner case), reverse both directions
-        if (hitWallX && hitWallY) {
-            xDirection *= -1;
-            yDirection *= -1;
-        }
+            boolean hitWallX = getModel().isWall(new Position(nextPosition.getX(), currentPosition.getY()));
+            boolean hitWallY = getModel().isWall(new Position(currentPosition.getX(), nextPosition.getY()));
 
-        // Recalculate next position after reflecting if needed
-        nextPosition = new Position(
-                currentPosition.getX() + xDirection,
-                currentPosition.getY() + yDirection
-        );
+            // Reflect directions based on wall collisions
+            if (hitWallX) ball.setXDirection(-ball.getXDirection());
+            if (hitWallY) ball.setYDirection(-ball.getYDirection());
 
-        // If the recalculated position is still a wall, re-initialize ball direction
-        if (getModel().isWall(nextPosition)) {
-            initializeBallDirection();
-        } else {
-            // Move the ball if the next position is not a wall
-            getModel().getBall().setPosition(nextPosition);
+            // Handle corner case
+            if (hitWallX && hitWallY) {
+                ball.setXDirection(-ball.getXDirection());
+                ball.setYDirection(-ball.getYDirection());
+            }
+
+            // Update the ball's next position after wall reflection
+            nextPosition = new Position(
+                    currentPosition.getX() + ball.getXDirection(),
+                    currentPosition.getY() + ball.getYDirection()
+            );
+
+            // Check for collisions with other balls
+            for (int j = 0; j < balls.size(); j++) {
+                if (i == j) continue; // Skip self
+
+                Ball otherBall = balls.get(j);
+                Position otherPosition = otherBall.getPosition();
+
+                // Check if the two balls are colliding
+                if (nextPosition.equals(otherPosition)) {
+                    handleBallCollision(ball, otherBall); // Handle collision response
+                }
+            }
+
+            // If recalculated position is invalid, reinitialize direction
+            if (getModel().isWall(nextPosition)) {
+                ball.initializeBallDirection();
+            } else {
+                ball.setPosition(nextPosition); // Move ball
+            }
         }
     }
 
+    private void handleBallCollision(Ball ball1, Ball ball2) {
+        // Simple collision response: Swap directions
+        int tempXDirection = ball1.getXDirection();
+        int tempYDirection = ball1.getYDirection();
+
+        ball1.setXDirection(ball2.getXDirection());
+        ball1.setYDirection(ball2.getYDirection());
+
+        ball2.setXDirection(tempXDirection);
+        ball2.setYDirection(tempYDirection);
+    }
+
+
+
+
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
-        // Move the ball on every step
-        if(!getModel().getBall().isFrozen())moveBall();
+        if (!getModel().getBalls().get(0).isFrozen()) {
+            moveBalls();
+        }
     }
 }
