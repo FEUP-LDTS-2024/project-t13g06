@@ -63,7 +63,7 @@ public class PowerUpController extends GameController {
                 slowDownBalls();
                 break;
             case "strongerBall":
-                // You can implement logic for stronger ball later
+                strongerBall();
                 break;
             case "jumpBoost":
                 player.activateJumpBoost();
@@ -80,19 +80,44 @@ public class PowerUpController extends GameController {
         }
     }
 
-    // Apply "speed up" power-up to all balls
+    private void strongerBall() {
+        for (Ball ball : arena.getBalls()) {
+            ball.makeStronger(); // Make the ball stronger
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    ball.makeNormal(); // Revert the ball to normal after 4 seconds
+                }
+            }, 4000); // 4000ms = 4 seconds
+        }
+    }
+    // Apply "speed up" power-up to all balls (with a 4-second timer)
     private void speedUpBalls() {
         for (Ball ball : arena.getBalls()) {
-            ball.increaseSpeed();
+            ball.increaseSpeed(); // Speed up the ball
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    ball.decreaseSpeed(); // Revert the speed after 4 seconds
+                }
+            }, 8000); // 8000ms = 8 seconds
         }
     }
 
-    // Apply "slow down" power-up to all balls
+    // Apply "slow down" power-up to all balls (with a 4-second timer)
     private void slowDownBalls() {
         for (Ball ball : arena.getBalls()) {
-            ball.decreaseSpeed();
+            ball.decreaseSpeed(); // Slow down the ball
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    ball.increaseSpeed(); // Revert the speed after 4 seconds
+                }
+            }, 4000); // 4000ms = 4 seconds
         }
     }
+
+
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {

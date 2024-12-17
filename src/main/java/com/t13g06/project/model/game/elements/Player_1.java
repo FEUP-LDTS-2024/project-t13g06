@@ -16,14 +16,15 @@ public class Player_1 extends Element {
         this.verticalSpeed = 0.0; // Start with no gravity effect
     }
 
-    // Lives management
-    public void decreaseLive() {
-        this.lives--;
-    }
-
     public int getLives() {
         return lives;
     }
+
+    public void loseLife(int amount) {
+        this.lives -= amount; // Decrease lives by the specified amount
+        if (this.lives < 0) this.lives = 0; // Ensure lives don't go below 0
+    }
+
 
     // Jump state management
     public boolean isJumping() {

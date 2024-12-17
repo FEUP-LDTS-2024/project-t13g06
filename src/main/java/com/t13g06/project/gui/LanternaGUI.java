@@ -96,10 +96,10 @@ public class LanternaGUI implements GUI {
 
         ACTION action = ACTION.NONE;
         if (keyStroke == 81) action = ACTION.QUIT; // q
-        else if (keyStroke == 37) action = ACTION.LEFT; // Arrow left
-        else if (keyStroke == 38) action = ACTION.UP; // Arrow up
-        else if (keyStroke == 39) action = ACTION.RIGHT; // Arrow right
-        else if (keyStroke == 40) action = ACTION.DOWN; // Arrow down
+        else if (keyStroke == 65) action = ACTION.LEFT; // A
+        else if (keyStroke == 87) action = ACTION.UP; // W
+        else if (keyStroke == 68) action = ACTION.RIGHT; // D
+        else if (keyStroke == 83) action = ACTION.DOWN; // S
 
             // Add the SELECT action
         else if (keyStroke == 10) action = ACTION.SELECT; // Enter key
