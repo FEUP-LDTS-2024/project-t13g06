@@ -93,15 +93,6 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         }
         return null;
     }
-    @Override
-    protected Player_2 createPlayer_2() {
-        for (int y = 0; y < lines.size(); y++) {
-            String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'T') return new Player_2(x, y);
-        }
-        return null;
-    }
 
     @Override
     protected List<Ball> createBall() {

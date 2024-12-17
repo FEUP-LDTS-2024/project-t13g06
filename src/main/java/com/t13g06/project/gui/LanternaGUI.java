@@ -1,5 +1,6 @@
 package com.t13g06.project.gui;
 
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.t13g06.project.model.Position;
 import com.googlecode.lanterna.TerminalSize;
@@ -20,12 +21,17 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
     private KeyEvent key;
+
+    // Track Player 1's last action for animation purposes
+    private ACTION lastActionPlayer1 = ACTION.NONE;
+
     public LanternaGUI(Screen screen) {
         this.screen = screen;
     }
@@ -34,9 +40,9 @@ public class LanternaGUI implements GUI {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         Terminal terminal = createTerminal(width, height, fontConfig);
 
-        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+        ((AWTTerminalFrame) terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e){
+            public void keyPressed(KeyEvent e) {
                 System.out.println(e);
                 try {
                     getNextAction();
@@ -45,7 +51,6 @@ public class LanternaGUI implements GUI {
                 }
                 key = e;
             }
-
         });
 
         this.screen = createScreen(terminal);
@@ -86,40 +91,49 @@ public class LanternaGUI implements GUI {
 
     public ACTION getNextAction() throws IOException {
         if (key == null) return ACTION.NONE;
-        //KeyStroke keyStroke = screen.pollInput();
         int keyStroke = key.getKeyCode();
         key = null;
 
-        if (keyStroke == 81) return ACTION.QUIT; //q
+        ACTION action = ACTION.NONE;
+        if (keyStroke == 81) action = ACTION.QUIT; // q
+        else if (keyStroke == 37) action = ACTION.LEFT; // Arrow left
+        else if (keyStroke == 38) action = ACTION.UP; // Arrow up
+        else if (keyStroke == 39) action = ACTION.RIGHT; // Arrow right
+        else if (keyStroke == 40) action = ACTION.DOWN; // Arrow down
 
-        if (keyStroke == 37) return ACTION.LEFT; //arrow left
-        if (keyStroke == 38) return ACTION.UP; //arrow up
-        if (keyStroke == 39) return ACTION.RIGHT; //arrow right
-        if (keyStroke == 40) return ACTION.DOWN; //arrow down
+            // Add the SELECT action
+        else if (keyStroke == 10) action = ACTION.SELECT; // Enter key
 
-        if (keyStroke == 87) return ACTION.UP_2; // w
-        if (keyStroke == 68) return ACTION.RIGHT_2; // d
-        if (keyStroke == 83) return ACTION.DOWN_2; // s
-        if (keyStroke == 65) return ACTION.LEFT_2; // a
+        // Update Player 1's last action for movement animations
+        if (action == ACTION.LEFT || action == ACTION.RIGHT || action == ACTION.UP || action == ACTION.NONE) {
+            lastActionPlayer1 = action;
+        }
 
-        if (keyStroke == 10) return ACTION.SELECT;
-
-        return ACTION.NONE;
+        return action;
     }
 
     @Override
     public void drawPlayer_1(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'À', "#FFD700");
-
-    }
-    @Override
-    public void drawPlayer_2(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'Ò', "#FFD777");
+        char playerChar;
+        switch (lastActionPlayer1) {
+            case LEFT:
+                playerChar = 'Ó'; // Walking left
+                break;
+            case RIGHT:
+                playerChar = 'Á'; // Walking right
+                break;
+            case UP:
+                playerChar = (lastActionPlayer1 == ACTION.RIGHT) ? 'Â' : 'Ô'; // Jumping
+                break;
+            default:
+                playerChar = (lastActionPlayer1 == ACTION.LEFT) ? 'Ò' : 'À'; // Idle (default direction)
+        }
+        drawCharacter(position.getX(), position.getY(), playerChar, "#900C3F ");
     }
 
     @Override
     public void drawBall(Position position) {
-        drawCharacter(position.getX(), position.getY(), '*', "#8B0000");
+        drawCharacter(position.getX(), position.getY(), '*', "#FDDA0D");
     }
 
     @Override
@@ -160,7 +174,6 @@ public class LanternaGUI implements GUI {
         drawCharacter(position.getX(), position.getY(), icon, color);
     }
 
-
     @Override
     public void drawText(Position position, String text, String color) {
         TextGraphics tg = screen.newTextGraphics();
@@ -170,8 +183,8 @@ public class LanternaGUI implements GUI {
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
-        if (c == 'Ò' || c == 'T' || c == '⚾') tg.setForegroundColor(TextColor.Factory.fromString(color));
-        if(c == ' ') tg.setBackgroundColor(TextColor.Factory.fromString(color));
+        if (c == ' ') tg.setBackgroundColor(TextColor.Factory.fromString(color));
+        else tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(x, y + 1, "" + c);
     }
 
@@ -189,4 +202,34 @@ public class LanternaGUI implements GUI {
     public void close() throws IOException {
         screen.close();
     }
+
+    public void drawCharacterImage(Position position, InputStream imageStream, int targetWidth, int targetHeight) throws IOException {
+        BufferedImage originalImage = ImageIO.read(imageStream);
+
+        // Resize the image
+        Image scaledImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
+        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resizedImage.createGraphics();
+        g2d.drawImage(scaledImage, 0, 0, null);
+        g2d.dispose();
+
+        TextGraphics graphics = screen.newTextGraphics();
+
+        for (int x = 0; x < resizedImage.getWidth(); x++) {
+            for (int y = 0; y < resizedImage.getHeight(); y++) {
+                int pixelColor = resizedImage.getRGB(x, y);
+                int alpha = (pixelColor >> 24) & 0xFF;
+
+                if (alpha == 0) continue;
+
+                int r = (pixelColor >> 16) & 0xFF;
+                int g = (pixelColor >> 8) & 0xFF;
+                int b = pixelColor & 0xFF;
+
+                graphics.setCharacter(position.getX() + x, position.getY() + y,
+                        new TextCharacter(' ', new TextColor.RGB(r, g, b), new TextColor.RGB(r, g, b)));
+            }
+        }
+    }
+
 }

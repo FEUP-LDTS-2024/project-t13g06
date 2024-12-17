@@ -12,7 +12,6 @@ public class Arena {
     private final int height;
 
     private Player_1 player_1;
-    private Player_2 player_2;
 
     private List<Ball> balls;
 
@@ -38,17 +37,9 @@ public class Arena {
         return player_1;
     }
 
-    public Player_2 getPlayer_2() {
-        return player_2;
-    }
-
     public void setPlayer_1(Player_1 player_1_) {
         this.player_1 = player_1_;
     }
-    public void setPlayer_2(Player_2 player_2_) {
-        this.player_2 = player_2_;
-    }
-
 
     public List<Ball> getBalls() {
         return balls;
@@ -111,7 +102,6 @@ public class Arena {
             // Check if position is empty and does not overlap with players or balls
             boolean positionIsValid = isEmpty(pos)
                     && !pos.equals(getPlayer_1().getPosition())
-                    && !pos.equals(getPlayer_2().getPosition())
                     && getBalls().stream().noneMatch(ball -> ball.getPosition().equals(pos)); // Check against all balls
 
             if (positionIsValid) {

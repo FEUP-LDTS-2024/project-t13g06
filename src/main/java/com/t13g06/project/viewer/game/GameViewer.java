@@ -25,7 +25,6 @@ public class GameViewer extends Viewer<Arena> {
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElements(gui, getModel().getPowerUp(), new PowerUpsViewer());
         drawElement(gui, getModel().getPlayer_1(), new Player_1_Viewer());
-        drawElement(gui, getModel().getPlayer_2(), new Player_2_Viewer());
 
         // Iterate through all balls and draw each one
         for (Ball ball : getModel().getBalls()) {

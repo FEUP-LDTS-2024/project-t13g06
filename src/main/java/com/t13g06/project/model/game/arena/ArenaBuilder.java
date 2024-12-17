@@ -9,7 +9,6 @@ public abstract class ArenaBuilder {
         Arena arena = new Arena(getWidth(), getHeight());
 
         arena.setPlayer_1(createPlayer_1());
-        arena.setPlayer_2(createPlayer_2());
 
         arena.setBalls(createBall());
 
@@ -28,7 +27,6 @@ public abstract class ArenaBuilder {
     protected abstract List<PowerUps> createPowerUp();
 
     protected abstract Player_1 createPlayer_1();
-    protected abstract Player_2 createPlayer_2();
 
     protected abstract List<Ball> createBall();
 }
