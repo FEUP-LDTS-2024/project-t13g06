@@ -102,7 +102,7 @@ public class LanternaGUI implements GUI {
         if (keyStroke == 83) return ACTION.DOWN_2; // s
         if (keyStroke == 65) return ACTION.LEFT_2; // a
 
-        //if (keyStroke == KeyType.Enter) return ACTION.SELECT;
+        if (keyStroke == 10) return ACTION.SELECT;
 
         return ACTION.NONE;
     }

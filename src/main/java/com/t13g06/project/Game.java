@@ -3,7 +3,9 @@ package com.t13g06.project;
 import com.t13g06.project.gui.LanternaGUI;
 import com.t13g06.project.model.game.arena.LoaderArenaBuilder;
 
+import com.t13g06.project.model.menu.Menu;
 import com.t13g06.project.states.GameState;
+import com.t13g06.project.states.MenuState;
 import com.t13g06.project.states.State;
 
 import java.awt.*;
@@ -16,9 +18,9 @@ public class Game {
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(53, 25);
-        //this.state = new MenuState(new Menu());
+        this.state = new MenuState(new Menu());
 
-        this.state = new GameState(new LoaderArenaBuilder(1).createArena());
+        //this.state = new GameState(new LoaderArenaBuilder(1).createArena());
     }
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
