@@ -38,17 +38,22 @@ public class Game {
         while (this.state != null) {
             long startTime = System.currentTimeMillis();
 
+            // Step the game state and process all current actions
             state.step(this, gui, startTime);
 
+
+            // Calculate elapsed time and sleep for the remaining frame duration
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
 
             try {
                 if (sleepTime > 0) Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
 
         gui.close();
     }
+
 }

@@ -5,6 +5,7 @@ import com.t13g06.project.model.Position;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 
 public interface GUI {
     ACTION getNextAction() throws IOException;
@@ -12,6 +13,7 @@ public interface GUI {
 
      void drawCharacterImage(Position position, InputStream imageStream, int targetWidth, int targetHeight) throws IOException;
 
+     Set<ACTION> getActionSet();
 
      void drawPlayer_1(Position position);
 

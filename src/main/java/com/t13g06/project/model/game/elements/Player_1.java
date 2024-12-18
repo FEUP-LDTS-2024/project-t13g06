@@ -65,6 +65,6 @@ public class Player_1 extends Element {
     }
 
     public void activateJumpBoost() {
-        this.jumpHeight *= 3; // Increase jump height temporarily
+        this.jumpHeight *= 2; // Increase jump height temporarily
     }
 }

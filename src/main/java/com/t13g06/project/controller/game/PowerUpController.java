@@ -9,7 +9,9 @@ import com.t13g06.project.model.game.elements.Ball;
 import com.t13g06.project.model.game.elements.Player_1;
 import com.t13g06.project.model.game.elements.PowerUps;
 
+import java.io.IOException;
 import java.util.Random;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +25,7 @@ public class PowerUpController extends GameController {
     }
 
     // Handle power-up collection
+
     public void collectPowerUp(PowerUps powerUp, Player_1 player) {
         // Activate the effect of the power-up
         applyPowerUpEffect(powerUp.getPower(), player);
@@ -39,8 +42,8 @@ public class PowerUpController extends GameController {
         }, 15000);
     }
 
-
     // Spawn a new random power-up at a valid position
+
     private void spawnRandomPowerUp() {
         Position randomPosition = null;
 
@@ -62,8 +65,8 @@ public class PowerUpController extends GameController {
             arena.getPowerUp().add(newPowerUp);
         }
     }
-
     // Helper method to check if there is a wall below the given position
+
     private boolean isWallBelow(Position position) {
         int x = position.getX();
         int y = position.getY();
@@ -73,8 +76,8 @@ public class PowerUpController extends GameController {
         return arena.isWall(positionBelow); // Assuming arena has a method isWall(Position)
     }
 
-
     // Apply the effect of the power-up
+
     private void applyPowerUpEffect(String type, Player_1 player) {
         switch (type) {
             case "freeze":
@@ -96,14 +99,13 @@ public class PowerUpController extends GameController {
                 break;
         }
     }
-
     // Apply "freeze" power-up to all balls
+
     private void freezeBalls() {
         for (Ball ball : arena.getBalls()) {
             ball.freeze(4000); // Freeze each ball for 4 seconds
         }
     }
-
     private void strongerBall() {
         for (Ball ball : arena.getBalls()) {
             ball.makeStronger(); // Make the ball stronger
@@ -115,6 +117,7 @@ public class PowerUpController extends GameController {
             }, 4000); // 4000ms = 4 seconds
         }
     }
+
     // Apply "speed up" power-up to all balls (with a 4-second timer)
     private void speedUpBalls() {
         for (Ball ball : arena.getBalls()) {
@@ -127,8 +130,8 @@ public class PowerUpController extends GameController {
             }, 8000); // 8000ms = 8 seconds
         }
     }
-
     // Apply "slow down" power-up to all balls (with a 4-second timer)
+
     private void slowDownBalls() {
         for (Ball ball : arena.getBalls()) {
             ball.decreaseSpeed(); // Slow down the ball
@@ -141,10 +144,8 @@ public class PowerUpController extends GameController {
         }
     }
 
-
-
     @Override
-    public void step(Game game, GUI.ACTION action, long time) {
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
         // NOTHING
     }
 }

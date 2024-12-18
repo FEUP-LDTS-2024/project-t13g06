@@ -25,12 +25,19 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import java.util.HashSet;
+import java.util.Set;
+
+// Modify the LanternaGUI class
 public class LanternaGUI implements GUI {
     private final Screen screen;
     private KeyEvent key;
 
     // Track Player 1's last action for animation purposes
     private ACTION lastActionPlayer1 = ACTION.NONE;
+
+    // Use an ActionSet to track currently pressed keys
+    private final Set<ACTION> actionSet = new HashSet<>();
 
     public LanternaGUI(Screen screen) {
         this.screen = screen;
@@ -43,13 +50,20 @@ public class LanternaGUI implements GUI {
         ((AWTTerminalFrame) terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e);
-                try {
-                    getNextAction();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                ACTION action = mapKeyToAction(e.getKeyCode());
+                if (action != ACTION.NONE) {
+                    actionSet.add(action); // Add the action to the ActionSet
+                    System.out.println("ActionSet updated (Pressed): " + actionSet);
                 }
-                key = e;
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                ACTION action = mapKeyToAction(e.getKeyCode());
+                if (action != ACTION.NONE) {
+                    actionSet.remove(action); // Remove the action when key is released
+                    System.out.println("ActionSet updated (Released): " + actionSet);
+                }
             }
         });
 
@@ -88,28 +102,35 @@ public class LanternaGUI implements GUI {
         AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
         return fontConfig;
     }
-
+    
+    public Set<ACTION> getActionSet() {
+        return actionSet;
+    }
+    
     public ACTION getNextAction() throws IOException {
-        if (key == null) return ACTION.NONE;
-        int keyStroke = key.getKeyCode();
-        key = null;
+        if (actionSet.isEmpty()) return ACTION.NONE; // If no keys are pressed, return NONE
 
-        ACTION action = ACTION.NONE;
-        if (keyStroke == 81) action = ACTION.QUIT; // q
-        else if (keyStroke == 65) action = ACTION.LEFT; // A
-        else if (keyStroke == 87) action = ACTION.UP; // W
-        else if (keyStroke == 68) action = ACTION.RIGHT; // D
-        else if (keyStroke == 83) action = ACTION.DOWN; // S
+        // Process the ActionSet to determine the current action
+        if (actionSet.contains(ACTION.QUIT)) return ACTION.QUIT;
+        if (actionSet.contains(ACTION.LEFT)) return ACTION.LEFT;
+        if (actionSet.contains(ACTION.RIGHT)) return ACTION.RIGHT;
+        if (actionSet.contains(ACTION.UP)) return ACTION.UP;
+        if (actionSet.contains(ACTION.DOWN)) return ACTION.DOWN;
+        if (actionSet.contains(ACTION.SELECT)) return ACTION.SELECT;
 
-            // Add the SELECT action
-        else if (keyStroke == 10) action = ACTION.SELECT; // Enter key
+        return ACTION.NONE;
+    }
 
-        // Update Player 1's last action for movement animations
-        if (action == ACTION.LEFT || action == ACTION.RIGHT || action == ACTION.UP || action == ACTION.NONE) {
-            lastActionPlayer1 = action;
+    private ACTION mapKeyToAction(int keyCode) {
+        switch (keyCode) {
+            case 81: return ACTION.QUIT; // Q
+            case 65: return ACTION.LEFT; // A
+            case 87: return ACTION.UP;   // W
+            case 68: return ACTION.RIGHT; // D
+            case 83: return ACTION.DOWN; // S
+            case 10: return ACTION.SELECT; // Enter
+            default: return ACTION.NONE; // No relevant action
         }
-
-        return action;
     }
 
     @Override
@@ -231,5 +252,4 @@ public class LanternaGUI implements GUI {
             }
         }
     }
-
 }

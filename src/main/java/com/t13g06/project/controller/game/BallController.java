@@ -8,6 +8,7 @@ import com.t13g06.project.model.game.elements.Ball;
 import com.t13g06.project.model.game.elements.Player_1;
 
 import java.util.List;
+import java.util.Set;
 
 public class BallController extends GameController {
     public BallController(Arena arena) {
@@ -96,7 +97,8 @@ public class BallController extends GameController {
     }
 
     @Override
-    public void step(Game game, GUI.ACTION action, long time) {
-        moveBalls();
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) {
+        moveBalls(); // Simply move the balls regardless of actions
     }
+
 }
