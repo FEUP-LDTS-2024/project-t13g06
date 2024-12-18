@@ -10,13 +10,15 @@ import com.t13g06.project.viewer.Viewer;
 import java.util.List;
 
 public class GameViewer extends Viewer<Arena> {
-    private int ballCountdown; // Countdown in seconds
+    private int ballCountdown = 5; // Countdown in seconds for the ball spawn
     private long lastUpdateTime; // Tracks the last time countdown was updated
+    private int iterations = 1;
+    private long gameStartTime; // Tracks the start time of the game
 
     public GameViewer(Arena arena) {
         super(arena);
-        this.ballCountdown = 5; // Start countdown at 5 seconds
         this.lastUpdateTime = System.currentTimeMillis(); // Initialize to current time
+        this.gameStartTime = System.currentTimeMillis(); // Initialize game start time
     }
 
     @Override
@@ -39,19 +41,17 @@ public class GameViewer extends Viewer<Arena> {
         );
 
         // Draw player lives
-        gui.drawText(
-                new Position(4, 2),
-                "Lives: " + "?".repeat(getModel().getPlayer_1().getLives()),
-                "#FFD700" // Gold color
-        );
+        gui.drawText(new Position(4, 2), "Lives: ", "#FFFFFF");
+        gui.drawText(new Position(11, 2), "?".repeat(getModel().getPlayer_1().getLives()), "#FF0000");
 
         // Update countdown based on elapsed time
-        updateCountdown();
+        updateCountdown(gui);
     }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
-        for (T element : elements)
+        for (T element : elements) {
             drawElement(gui, element, viewer);
+        }
     }
 
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
@@ -59,17 +59,31 @@ public class GameViewer extends Viewer<Arena> {
     }
 
     /**
-     * Updates the countdown timer based on elapsed time.
+     * Updates the countdown timers (ball spawn and game time).
      */
-    private void updateCountdown() {
+    private void updateCountdown(GUI gui) {
         long currentTime = System.currentTimeMillis(); // Get current time
         if (currentTime - lastUpdateTime >= 1000) { // Check if 1 second has passed
-            ballCountdown--; // Decrement countdown
+            ballCountdown--; // Decrement ball countdown
             lastUpdateTime = currentTime; // Reset last update time
         }
 
-        if (ballCountdown < 1) {
-            ballCountdown = 5; // Reset countdown to 5 seconds
+        if (ballCountdown < 0) {
+            ballCountdown = 5 + iterations;
+            iterations++;
         }
+
+        // Calculate and display the game time in mm:ss format
+        long elapsedTimeInSeconds = (currentTime - gameStartTime) / 1000;
+        long minutes = elapsedTimeInSeconds / 60;
+        long seconds = elapsedTimeInSeconds % 60;
+        String timeFormatted = String.format("%02d:%02d", minutes, seconds);
+
+        // Draw the formatted time on the screen
+        gui.drawText(
+                new Position(23, 2), // Position where the timer will be shown
+                timeFormatted,
+                "#FFFFFF" // White color
+        );
     }
 }

@@ -39,16 +39,40 @@ public class PowerUpController extends GameController {
         }, 15000);
     }
 
+
     // Spawn a new random power-up at a valid position
     private void spawnRandomPowerUp() {
-        Position randomPosition = arena.getRandomValidPosition();
+        Position randomPosition = null;
+
+        while (randomPosition == null || !isWallBelow(randomPosition)) {
+                // Get a random valid position
+            randomPosition = arena.getRandomValidPosition();
+        }
+
+        // If a valid position was found, spawn the power-up
         if (randomPosition != null) {
+            // Define possible power-up types
             String[] powerUpTypes = {"freeze", "speedUpBall", "slowDownEnemy", "strongerBall", "jumpBoost"};
             String randomPowerType = powerUpTypes[random.nextInt(powerUpTypes.length)];
+
+            // Create a new power-up at the valid position
             PowerUps newPowerUp = new PowerUps(randomPosition.getX(), randomPosition.getY(), randomPowerType);
+
+            // Add the new power-up to the arena
             arena.getPowerUp().add(newPowerUp);
         }
     }
+
+    // Helper method to check if there is a wall below the given position
+    private boolean isWallBelow(Position position) {
+        int x = position.getX();
+        int y = position.getY();
+
+        // Check if the position directly below (y + 1) is a wall
+        Position positionBelow = new Position(x, y + 1);
+        return arena.isWall(positionBelow); // Assuming arena has a method isWall(Position)
+    }
+
 
     // Apply the effect of the power-up
     private void applyPowerUpEffect(String type, Player_1 player) {

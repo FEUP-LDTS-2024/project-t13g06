@@ -39,7 +39,11 @@ public class BallController extends GameController {
                     ball.setYDirection(-ball.getYDirection());
                     nextPosition = calculateNextPosition(ball, currentPosition);
                 }
-
+                // Check collision with walls
+                if (getModel().isWall(new Position(nextPosition.getX(), nextPosition.getY()))) {
+                    ball.setXDirection(-ball.getXDirection());
+                    nextPosition = calculateNextPosition(ball, currentPosition);
+                }
                 // Check collision with player
                 if (nextPosition.equals(player.getPosition())) {
                     // Player is hit
@@ -61,7 +65,7 @@ public class BallController extends GameController {
                 // Check ball-to-ball collisions
                 for (int j = i + 1; j < balls.size(); j++) {
                     Ball otherBall = balls.get(j);
-                    if (nextPosition.equals(otherBall.getPosition())) {
+                    if (nextPosition.equals(calculateNextPosition(otherBall,otherBall.getPosition()))) {
                         handleBallCollision(ball, otherBall);
                     }
                 }

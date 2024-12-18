@@ -88,21 +88,23 @@ public class Arena {
         return false;
     }
 
-
-
-    // Find a random valid position for spawning power-ups
     public Position getRandomValidPosition() {
         int width = getWidth();
         int height = getHeight();
         int maxAttempts = 100;
+        int padding = 3; // Set the padding to 3
 
+        // Ensure the valid range for spawning the power-up is adjusted with the padding
         for (int i = 0; i < maxAttempts; i++) {
-            Position pos = new Position(random.nextInt(width), random.nextInt(height));
+            // Random position within the boundaries, excluding padding
+            Position pos = new Position(random.nextInt(width - 2 * padding) + padding,
+                    random.nextInt(height - 2 * padding) + padding);
 
-            // Check if position is empty and does not overlap with players or balls
+            // Check if the position is empty and does not overlap with players, balls, or power-ups
             boolean positionIsValid = isEmpty(pos)
-                    && !pos.equals(getPlayer_1().getPosition())
-                    && getBalls().stream().noneMatch(ball -> ball.getPosition().equals(pos)); // Check against all balls
+                    && !pos.equals(getPlayer_1().getPosition()) // Ensure the position is not the player's position
+                    && getBalls().stream().noneMatch(ball -> ball.getPosition().equals(pos)) // Check against all balls
+                    && getPowerUp().stream().noneMatch(powerUp -> powerUp.getPosition().equals(pos)); // Check against existing power-ups
 
             if (positionIsValid) {
                 return pos;
@@ -110,6 +112,10 @@ public class Arena {
         }
         return null; // If no valid position is found after multiple attempts
     }
+
+
+
+
 
 
 }
