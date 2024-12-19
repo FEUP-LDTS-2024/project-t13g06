@@ -37,26 +37,26 @@ public class EndViewer extends Viewer<End> {
         long seconds = elapsedTimeInSeconds % 60;
         String timeFormatted = String.format("Time Survived: %02d:%02d", minutes, seconds);
 
-        gui.drawText(new Position(12, 8), timeFormatted, "#FFFFFF"); // Slightly moved up
+        gui.drawText(new Position(26, 8), timeFormatted, "#FFFFFF"); // Slightly moved up
 
         if (!getModel().isSubmitted()) {
             // Show the input field for the name
-            gui.drawText(new Position(25, 13), getModel().getPlayerName(), "#FFFFFF");
+            gui.drawText(new Position(38, 13), getModel().getPlayerName(), "#FFFFFF");
 
-            gui.drawText(new Position(8, 13), getModel().getEntry(0), getModel().isSelected(0) ? "#FFD700" : "#FFFFFF");
-            gui.drawText(new Position(8, 14), getModel().getEntry(1), getModel().isSelected(1) ? "#FFD700" : "#FFFFFF");
+            gui.drawText(new Position(22, 13), getModel().getEntry(0), getModel().isSelected(0) ? "#FFD700" : "#FFFFFF");
+            gui.drawText(new Position(22, 14), getModel().getEntry(1), getModel().isSelected(1) ? "#FFD700" : "#FFFFFF");
         } else {
             // Display the submitted name and score
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             String currentDate = dateFormat.format(new Date());
             String savedEntry = String.format("%-6s %02d:%02d %s", getModel().getPlayerName(), minutes, seconds, currentDate);
-            gui.drawText(new Position(8, 11), "Score Saved!", "#00FF00"); // Adjusted to fit better
-            gui.drawText(new Position(8, 12), savedEntry, "#FFFFFF");
+            gui.drawText(new Position(22, 11), "Score Saved!", "#00FF00"); // Adjusted to fit better
+            gui.drawText(new Position(22, 12), savedEntry, "#FFFFFF");
         }
 
 
         gui.drawText(
-                new Position(8, 15),
+                new Position(22, 15),
                 getModel().getEntry(2),
                 getModel().isSelected(2) ? "#FFD700" : "#FFFFFF"
         );

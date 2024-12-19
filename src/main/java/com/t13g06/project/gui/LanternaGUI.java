@@ -165,8 +165,8 @@ public class LanternaGUI implements GUI {
             default:
                 playerChar = (lastActionPlayer1 == ACTION.LEFT) ? 'Ò' : 'À'; // Idle (default direction)
         }
-        System.out.println(lastActionPlayer1);
-        drawCharacter(position.getX(), position.getY(), playerChar, "#900C3F ");
+
+        drawCharacter(position.getX(), position.getY(), playerChar, "#FFFFFF ");
     }
 
     @Override
@@ -176,7 +176,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawWall(Position position) {
-        drawCharacter(position.getX(), position.getY(), ' ', "#3333FF");
+        drawCharacter(position.getX(), position.getY(), ' ', "#9B0081");
     }
 
     @Override
@@ -195,11 +195,11 @@ public class LanternaGUI implements GUI {
                 break;
             case "slowDownEnemy":
                 icon = '&'; // Icon for slowing down opponents
-                color = "#FF0000"; // Red
+                color = "#808080"; // Red
                 break;
             case "strongerBall":
                 icon = '>'; // Icon for increasing ball strength
-                color = "#FFFF00"; // Yellow
+                color = "#FF0000"; // Yellow
                 break;
             case "jumpBoost":
                 icon = '+'; // Icon for jump boost
