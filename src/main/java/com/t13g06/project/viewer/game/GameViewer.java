@@ -7,6 +7,8 @@ import com.t13g06.project.model.game.elements.Ball;
 import com.t13g06.project.model.game.elements.Element;
 import com.t13g06.project.viewer.Viewer;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class GameViewer extends Viewer<Arena> {
@@ -22,7 +24,17 @@ public class GameViewer extends Viewer<Arena> {
     }
 
     @Override
-    public void drawElements(GUI gui) {
+    public void drawElements(GUI gui) throws IOException {
+        String filePath = "images/GameBackground.png";
+        InputStream imageStream = getClass().getClassLoader().getResourceAsStream(filePath);
+        if (imageStream != null) {
+            int scaledWidth = 51;  // Target width in text cells
+            int scaledHeight = 21   ; // Target height in text cells
+            gui.drawCharacterImage(new Position(2, 0), imageStream, scaledWidth, scaledHeight);
+        } else {
+            System.err.println("Image not found: " + filePath);
+        }
+
         // Draw all elements
         drawElements(gui, getModel().getWalls(), new WallViewer());
         drawElements(gui, getModel().getPowerUp(), new PowerUpsViewer());

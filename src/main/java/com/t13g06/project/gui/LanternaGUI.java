@@ -6,8 +6,6 @@ import com.t13g06.project.model.Position;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -28,17 +26,13 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-// Modify the LanternaGUI class
+
 public class LanternaGUI implements GUI {
     private final Screen screen;
-    private KeyEvent key;
-    private String lastCharacterPressed = ""; // Default to null character
 
+    private String lastCharacterPressed = "";
 
-    // Track Player 1's last action for animation purposes
     private ACTION lastActionPlayer1 = ACTION.NONE;
-
-    // Use an ActionSet to track currently pressed keys
     private final Set<ACTION> actionSet = new HashSet<>();
 
     public LanternaGUI(Screen screen) {
@@ -54,15 +48,14 @@ public class LanternaGUI implements GUI {
             public void keyPressed(KeyEvent e) {
                 ACTION action = mapKeyToAction(e.getKeyCode());
                 if (action != ACTION.NONE) {
-                    actionSet.add(action); // Add the action to the ActionSet
+                    actionSet.add(action);
 
-                    char typedChar = e.getKeyChar(); // Attempt to get the character
+                    char typedChar = e.getKeyChar();
                     if (typedChar != KeyEvent.CHAR_UNDEFINED && isValidCharacter(typedChar)) {
 
                         lastCharacterPressed = String.valueOf(typedChar);
                     }
 
-                    System.out.println("ActionSet updated (Pressed): " + actionSet + " last key = " + lastCharacterPressed);
                 }
             }
 
@@ -70,8 +63,7 @@ public class LanternaGUI implements GUI {
             public void keyReleased(KeyEvent e) {
                 ACTION action = mapKeyToAction(e.getKeyCode());
                 if (action != ACTION.NONE) {
-                    actionSet.remove(action); // Remove the action when key is released
-                    System.out.println("ActionSet updated (Released): " + actionSet);
+                    actionSet.remove(action);
                 }
             }
         });
@@ -134,23 +126,28 @@ public class LanternaGUI implements GUI {
     }
 
     private ACTION mapKeyToAction(int keyCode) {
+        ACTION action = ACTION.NONE;
         switch (keyCode) {
-            case 81: return ACTION.QUIT; // Q
-            case 37: return ACTION.LEFT; // Left Arrow
-            case 38: return ACTION.UP;   // Up Arrow
-            case 39: return ACTION.RIGHT; // Right Arrow
-            case 40: return ACTION.DOWN; // Down Arrow
-            case 10: return ACTION.SELECT; // Enter
-            case 8: return ACTION.BACKSPACE; // Backspace
+            case 81: action = ACTION.QUIT; break; // Q
+            case 37: action = ACTION.LEFT; break; // Left Arrow
+            case 38: action = ACTION.UP; break;   // Up Arrow
+            case 39: action = ACTION.RIGHT; break; // Right Arrow
+            case 40: action = ACTION.DOWN; break; // Down Arrow
+            case 10: action = ACTION.SELECT; break; // Enter
+            case 8: action = ACTION.BACKSPACE; break; // Backspace
             default:
-                // Handle character typing for TYPE action
                 if ((keyCode >= 32 && keyCode <= 126) || (keyCode >= 128 && keyCode <= 255)) {
-                    return ACTION.TYPE; // All printable ASCII or extended characters
+                    action = ACTION.TYPE; // All printable ASCII or extended characters
                 }
-                return ACTION.NONE; // No relevant action
         }
 
+        if (action != ACTION.NONE) {
+            lastActionPlayer1 = action; // Update the last action here
+        }
+
+        return action;
     }
+
 
     @Override
     public void drawPlayer_1(Position position) {
@@ -168,6 +165,7 @@ public class LanternaGUI implements GUI {
             default:
                 playerChar = (lastActionPlayer1 == ACTION.LEFT) ? 'Ò' : 'À'; // Idle (default direction)
         }
+        System.out.println(lastActionPlayer1);
         drawCharacter(position.getX(), position.getY(), playerChar, "#900C3F ");
     }
 
@@ -218,11 +216,15 @@ public class LanternaGUI implements GUI {
     public void drawText(Position position, String text, String color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(TextColor.Factory.fromString(color));
+        tg.setBackgroundColor(new TextColor.RGB(9, 0, 60)); // RGB values
+
         tg.putString(position.getX(), position.getY(), text);
     }
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(new TextColor.RGB(9, 0, 60));
+
         if (c == ' ') tg.setBackgroundColor(TextColor.Factory.fromString(color));
         else tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.putString(x, y + 1, "" + c);
