@@ -32,6 +32,8 @@ import java.util.Set;
 public class LanternaGUI implements GUI {
     private final Screen screen;
     private KeyEvent key;
+    private String lastCharacterPressed = ""; // Default to null character
+
 
     // Track Player 1's last action for animation purposes
     private ACTION lastActionPlayer1 = ACTION.NONE;
@@ -53,7 +55,14 @@ public class LanternaGUI implements GUI {
                 ACTION action = mapKeyToAction(e.getKeyCode());
                 if (action != ACTION.NONE) {
                     actionSet.add(action); // Add the action to the ActionSet
-                    System.out.println("ActionSet updated (Pressed): " + actionSet);
+
+                    char typedChar = e.getKeyChar(); // Attempt to get the character
+                    if (typedChar != KeyEvent.CHAR_UNDEFINED && isValidCharacter(typedChar)) {
+
+                        lastCharacterPressed = String.valueOf(typedChar);
+                    }
+
+                    System.out.println("ActionSet updated (Pressed): " + actionSet + " last key = " + lastCharacterPressed);
                 }
             }
 
@@ -118,19 +127,29 @@ public class LanternaGUI implements GUI {
         if (actionSet.contains(ACTION.DOWN)) return ACTION.DOWN;
         if (actionSet.contains(ACTION.SELECT)) return ACTION.SELECT;
 
+        if (actionSet.contains(ACTION.BACKSPACE)) return ACTION.BACKSPACE;
+        if (actionSet.contains(ACTION.TYPE)) return ACTION.TYPE;
+
         return ACTION.NONE;
     }
 
     private ACTION mapKeyToAction(int keyCode) {
         switch (keyCode) {
             case 81: return ACTION.QUIT; // Q
-            case 65: return ACTION.LEFT; // A
-            case 87: return ACTION.UP;   // W
-            case 68: return ACTION.RIGHT; // D
-            case 83: return ACTION.DOWN; // S
+            case 37: return ACTION.LEFT; // Left Arrow
+            case 38: return ACTION.UP;   // Up Arrow
+            case 39: return ACTION.RIGHT; // Right Arrow
+            case 40: return ACTION.DOWN; // Down Arrow
             case 10: return ACTION.SELECT; // Enter
-            default: return ACTION.NONE; // No relevant action
+            case 8: return ACTION.BACKSPACE; // Backspace
+            default:
+                // Handle character typing for TYPE action
+                if ((keyCode >= 32 && keyCode <= 126) || (keyCode >= 128 && keyCode <= 255)) {
+                    return ACTION.TYPE; // All printable ASCII or extended characters
+                }
+                return ACTION.NONE; // No relevant action
         }
+
     }
 
     @Override
@@ -224,6 +243,21 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
+    private boolean isValidCharacter(char character) {
+        return (character >= 'A' && character <= 'Z') || // Uppercase letters
+                (character >= 'a' && character <= 'z');  // Lowercase letters
+    }
+
+
+    /**
+     * Get the last character typed by the user.
+     * Returns '\0' if no valid character has been typed since the last check.
+     */
+    public String getLastCharacterPressed() {
+        String temp = String.valueOf(lastCharacterPressed); // Store the current character
+        lastCharacterPressed = ""; // Reset to null character
+        return temp; // Return the stored character
+    }
     public void drawCharacterImage(Position position, InputStream imageStream, int targetWidth, int targetHeight) throws IOException {
         BufferedImage originalImage = ImageIO.read(imageStream);
 

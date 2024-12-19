@@ -6,13 +6,21 @@ import com.t13g06.project.model.Position;
 import com.t13g06.project.model.game.arena.Arena;
 import com.t13g06.project.model.game.elements.Ball;
 import com.t13g06.project.model.game.elements.Player_1;
+import com.t13g06.project.model.menu.End;
+import com.t13g06.project.model.menu.Menu;
+import com.t13g06.project.states.EndState;
+import com.t13g06.project.states.MenuState;
 
 import java.util.List;
 import java.util.Set;
 
 public class BallController extends GameController {
-    public BallController(Arena arena) {
+    private Boolean lostGame = false;
+    private long gameStartTime; // Add a field for gameStartTime
+
+    public BallController(Arena arena, long gameStartTime) {
         super(arena);
+        this.gameStartTime = gameStartTime; // Initialize it
     }
 
     public void moveBalls() {
@@ -58,7 +66,7 @@ public class BallController extends GameController {
 
                     if (player.getLives() <= 0) {
                         System.out.println("Game Over! Player has no lives left.");
-                        System.exit(0);
+                        this.lostGame = true;
                     }
                     break; // Exit the step loop if the ball hits the player
                 }
@@ -99,6 +107,10 @@ public class BallController extends GameController {
     @Override
     public void step(Game game, Set<GUI.ACTION> actionSet, long time) {
         moveBalls(); // Simply move the balls regardless of actions
+        if (lostGame) {
+            long elapsedTime = (System.currentTimeMillis() - gameStartTime) / 1000; // Calculate elapsed time in seconds
+            game.setState(new EndState(new End(), elapsedTime)); // Pass the elapsed time to EndState
+        }
     }
 
 }

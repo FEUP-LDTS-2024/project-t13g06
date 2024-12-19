@@ -1,10 +1,8 @@
 package com.t13g06.project;
 
 import com.t13g06.project.gui.LanternaGUI;
-import com.t13g06.project.model.game.arena.LoaderArenaBuilder;
 
 import com.t13g06.project.model.menu.Menu;
-import com.t13g06.project.states.GameState;
 import com.t13g06.project.states.MenuState;
 import com.t13g06.project.states.State;
 
@@ -56,4 +54,7 @@ public class Game {
         gui.close();
     }
 
+    public String getLastCharacterPressed() {
+        return gui.getLastCharacterPressed();
+    }
 }

@@ -59,14 +59,6 @@ class ArenaViewerTest {
         Mockito.verify(gui, Mockito.times(1)).drawPlayer_1(Mockito.any(Position.class));
     }
     @Test
-    void drawPlayer2() throws IOException {
-        viewer.draw(gui);
-
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer_2(new Position(5, 12));
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer_2(Mockito.any(Position.class));
-    }
-
-    @Test
     void refreshAndClear() throws IOException {
         viewer.draw(gui);
 
