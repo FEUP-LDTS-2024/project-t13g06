@@ -99,7 +99,7 @@ public class PowerUpController extends GameController {
                 public void run() {
                     ball.makeNormal();
                 }
-            }, 4000);
+            }, 10000);
         }
     }
 
@@ -112,7 +112,7 @@ public class PowerUpController extends GameController {
                 public void run() {
                     ball.decreaseSpeed();
                 }
-            }, 8000);
+            }, 6000);
         }
     }
 
@@ -125,7 +125,7 @@ public class PowerUpController extends GameController {
                 public void run() {
                     ball.increaseSpeed();
                 }
-            }, 4000);
+            }, 3000);
         }
     }
 

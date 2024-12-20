@@ -16,7 +16,7 @@ public class Player extends Element {
         this.lives = 3;
         this.isJumping = false;
         this.jumpProgress = 0;
-        this.jumpHeight = 4;
+        this.jumpHeight = 5;
         this.verticalSpeed = 0.0;
     }
 
@@ -58,7 +58,7 @@ public class Player extends Element {
 
     // Resets the player's jump height to its default value
     public void setJumpHeightStart() {
-        this.jumpHeight = 4;
+        this.jumpHeight = 6;
     }
 
     // Gets the player's vertical speed for gravity effects
@@ -79,7 +79,7 @@ public class Player extends Element {
 
     // Activates a temporary jump boost, doubling the jump height
     public void activateJumpBoost() {
-        this.jumpHeight *= 2;
+        this.jumpHeight += 3;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {

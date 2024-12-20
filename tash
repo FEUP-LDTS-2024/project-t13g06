@@ -1,0 +1,140 @@
+[33mcommit 2e7def6a35eeb30fcb5a69a6c450c08c5def4640[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mintermediate-delivery[m[33m)[m
+Author: Atfas <afonsosaraiva9@gmail.com>
+Date:   Thu Dec 12 16:42:17 2024 +0000
+
+    Added custom font for drawings
+
+[33mcommit 6a77eb99f610ab59d2a7cca65d377e537a585461[m[33m ([m[1;33mtag: [m[1;33mintermediate-delivery[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/intermediate-delivery[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mgame[m[33m)[m
+Merge: c84d626 372a1f8
+Author: atfas <65710991+Atfas@users.noreply.github.com>
+Date:   Mon Nov 25 11:44:42 2024 +0000
+
+    Merge pull request #3 from FEUP-LDTS-2024/junit-testing
+    
+    Junit testing
+
+[33mcommit c84d62628383bbc768aa609ddb562c5540ab4cb3[m
+Merge: c096d21 f8bda2f
+Author: atfas <65710991+Atfas@users.noreply.github.com>
+Date:   Mon Nov 25 11:39:20 2024 +0000
+
+    Merge pull request #2 from FEUP-LDTS-2024/game
+    
+    Game
+
+[33mcommit c096d21b7e1c7da57b822d8de2b303b036a4ce48[m
+Merge: 033f017 26c8309
+Author: iines0 <up202304726@up.pt>
+Date:   Mon Nov 25 11:37:57 2024 +0000
+
+    Merge pull request #1 from FEUP-LDTS-2024/report
+    
+    Report
+
+[33mcommit 26c83094122e7967abc359bd9e0d955d6ec5c451[m
+Author: iines0 <up202304726@up.pt>
+Date:   Mon Nov 25 11:36:37 2024 +0000
+
+    Added UML and Design to README.md
+
+[33mcommit 500845d9678ca9bd63ff6d71f2d31458b5c72612[m
+Author: iines0 <up202304726@up.pt>
+Date:   Mon Nov 25 09:59:22 2024 +0000
+
+    Updated README.md
+
+[33mcommit 058e4ff5c40434968e4ff9c70d6cd091c83c1791[m
+Author: iines0 <up202304726@up.pt>
+Date:   Sun Nov 24 23:01:25 2024 +0000
+
+    Added Mockups to README.md
+
+[33mcommit 372a1f80db3dda27bb36ecfb6f302568ff4340bc[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Sun Nov 24 19:08:17 2024 +0000
+
+    Improved Model tests
+
+[33mcommit 5f9e2c3e7d12b9c0188ce65d037d51e15b1ab394[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Sun Nov 24 18:54:45 2024 +0000
+
+    Create GUI tests
+
+[33mcommit 3339bc8b2cc0d4339d5d7300bdc07e608c645492[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Sun Nov 24 18:44:45 2024 +0000
+
+    Created Model test
+
+[33mcommit 4b4488ccb85ca8ece53978bd311b0b1ec3b07313[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Sun Nov 24 18:28:44 2024 +0000
+
+    Created Viewer tests
+
+[33mcommit f8bda2fc013d8caee87890e51f98ed4ae20bb417[m[33m ([m[1;31morigin/game[m[33m)[m
+Author: Atfas <afonsosaraiva9@gmail.com>
+Date:   Sun Nov 24 16:27:54 2024 +0000
+
+    (Small fix) arena resized
+
+[33mcommit 041a987220bf23c139b02f8129c82462b01f7f0a[m
+Author: Atfas <afonsosaraiva9@gmail.com>
+Date:   Sun Nov 24 11:18:00 2024 +0000
+
+    A few adjustments for first submission (arena presentation...)
+
+[33mcommit 833c720e8af70d2106fa13d6ba93fa53459d13a5[m
+Author: Atfas <afonsosaraiva9@gmail.com>
+Date:   Sun Nov 24 11:17:04 2024 +0000
+
+    Added ball class model and viewer and changes on arena design (arena1.lvl and lives text presentation)
+
+[33mcommit 6ac6c508353de4bab2a7c44a150d42dd4ed88dac[m
+Author: Atfas <afonsosaraiva9@gmail.com>
+Date:   Sun Nov 24 11:11:52 2024 +0000
+
+    Adaptation of Hero-Solid (removed unnecessary classes for first submision, and small code changes), added PowerUps class model and viewer
+
+[33mcommit 3b8a30b4c951e3eacd341c956d44fe0a3074d6bc[m
+Author: iines0 <up202304726@up.pt>
+Date:   Sat Nov 23 22:39:15 2024 +0000
+
+    Added Planned Features in README.md
+
+[33mcommit 2c1cb4a8d8dbbccadadea49609fa4698e0bcab41[m
+Author: iines0 <up202304726@up.pt>
+Date:   Sat Nov 23 14:25:28 2024 +0000
+
+    Include Game Description in README.md
+
+[33mcommit 033f017eb6599b11fee443d5c382fa91419c3404[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Mon Nov 11 11:36:05 2024 +0000
+
+    Fixed package name
+
+[33mcommit 556ac34d61e19a7d0dd6167a638b333f64abe700[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Mon Nov 11 11:32:55 2024 +0000
+
+    Fixed package name
+
+[33mcommit a92473bfefd26a185c5a9f7fb7caa8fe7d08aa04[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Sun Nov 10 23:26:30 2024 +0000
+
+    Fixed folder name
+
+[33mcommit d1b6bc537ab0c73684d2f4719e944f37ec88c7d2[m
+Author: Shad0wBD <danielsilvamarques2005@gmail.com>
+Date:   Sun Nov 10 23:22:09 2024 +0000
+
+    Project setup
+
+[33mcommit 187fbe0045fbfc8dc56733e43d7595874c472cd6[m
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Thu Nov 7 16:13:41 2024 +0000
+
+    add deadline
