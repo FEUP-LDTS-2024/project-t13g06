@@ -80,6 +80,7 @@ public class EndController extends Controller<End> {
 
         // TEMPORARIAMENTE ASSIM POIS O WRITE ESTA A ESCREVER NO CAMINHO DO BUILD EM VEZ DO SRC
         String logFilePath = "/home/ash/Documents/Projetos/LDTS/ProjetoLDTS/project-t13g06/src/main/resources/leaderboard/gameLog.txt";
+
         try {
             File file = new File(logFilePath);
             System.out.println("Resolved file path: " + file.getAbsolutePath());

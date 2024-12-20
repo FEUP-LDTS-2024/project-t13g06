@@ -10,7 +10,7 @@ public class MusicPlayer {
         this.clip = null;
     }
 
-    // Plays background music in a continuous loop
+    // Plays background music in a continuous loop during the game
     public void playBackgroundMusic() {
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(getClass().getResource("/audio/backgroundMusic.wav"));
