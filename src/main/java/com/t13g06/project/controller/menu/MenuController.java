@@ -42,7 +42,7 @@ public class MenuController extends Controller<Menu> {
                         game.setState(new GameState(new LoaderArenaBuilder(1).createArena()));
                     if (getModel().isSelectedLeaderBoard())
                         game.setState(new LeaderBoardState(new LeaderBoard()));
-                    if (getModel().isSelectedSettings())
+                    if (getModel().isSelectedInstructions())
                         game.setState(new InstructionsState(new Instructions()));
                     if (getModel().isSelectedExit())
                         game.setState(null);

@@ -4,9 +4,15 @@ plugins {
     id 'info.solidsoft.pitest' version '1.15.0'
 }
 application {
-    mainClass = 'com.t13g06.project.Game'
+    mainClass.set('com.t13g06.project.Game')
 }
-group = 'com.t1306.project'
+
+pitest {
+    junit5PluginVersion = '1.0.0'
+    verbose = true
+}
+
+group = 'com.t13g06.project'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -14,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation platform('org.junit:junit-bom:5.9.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-core:3.7.7'
     testImplementation 'net.jqwik:jqwik:1.5.1'

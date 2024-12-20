@@ -37,7 +37,7 @@ public class Menu {
     public boolean isSelectedLeaderBoard() {
         return isSelected(1);
     }
-    public boolean isSelectedSettings() {
+    public boolean isSelectedInstructions() {
         return isSelected(2);
     }
     public boolean isSelectedExit() {
