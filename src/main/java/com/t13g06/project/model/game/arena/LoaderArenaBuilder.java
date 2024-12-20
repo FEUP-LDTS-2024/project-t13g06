@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LoaderArenaBuilder extends ArenaBuilder {
-    private final int level;
-    private final List<String> lines;
+    private final int level; // The level to load
+    private final List<String> lines; // Lines read from the level file
 
     public LoaderArenaBuilder(int level) throws IOException {
         this.level = level;
@@ -23,6 +23,7 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         lines = readLines(br);
     }
 
+    // Reads all lines from the file
     private List<String> readLines(BufferedReader br) throws IOException {
         List<String> lines = new ArrayList<>();
         for (String line; (line = br.readLine()) != null; )
@@ -30,6 +31,7 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         return lines;
     }
 
+    // Gets the width of the arena based on the longest line
     @Override
     protected int getWidth() {
         int width = 0;
@@ -38,11 +40,13 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         return width;
     }
 
+    // Gets the height of the arena based on the number of lines
     @Override
     protected int getHeight() {
         return lines.size();
     }
 
+    // Creates walls based on the '#' characters in the file
     @Override
     protected List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
@@ -56,11 +60,10 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         return walls;
     }
 
+    // Creates power-ups based on specific characters in the file
     @Override
     protected List<PowerUps> createPowerUp() {
         List<PowerUps> powerUps = new ArrayList<>();
-
-        // Define a map to associate icons with power-up types
         Map<Character, String> powerUpTypes = Map.of(
                 '*', "freeze",
                 '>', "speedUpBall",
@@ -84,16 +87,18 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         return powerUps;
     }
 
+    // Creates the player based on the 'O' character in the file
     @Override
-    protected Player_1 createPlayer_1() {
+    protected Player createPlayer_1() {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'O') return new Player_1(x, y);
+                if (line.charAt(x) == 'O') return new Player(x, y);
         }
         return null;
     }
 
+    // Creates balls based on the '⚾' character in the file
     @Override
     protected List<Ball> createBall() {
         List<Ball> balls = new ArrayList<>();
@@ -101,15 +106,12 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == '⚾') { // Check for the ball character
-                    balls.add(new Ball(x, y)); // Create and add the ball
+                if (line.charAt(x) == '⚾') {
+                    balls.add(new Ball(x, y));
                 }
             }
         }
 
-        return balls; // Return the list of balls
+        return balls;
     }
-
-
-
 }

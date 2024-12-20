@@ -26,7 +26,7 @@ public abstract class ArenaBuilder {
 
     protected abstract List<PowerUps> createPowerUp();
 
-    protected abstract Player_1 createPlayer_1();
+    protected abstract Player createPlayer_1();
 
     protected abstract List<Ball> createBall();
 }

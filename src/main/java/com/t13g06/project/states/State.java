@@ -28,19 +28,16 @@ public abstract class State<T> {
 
 
     public void step(Game game, GUI gui, long time) throws IOException {
-        // Retrieve the current set of active actions from the GUI
+
         Set<GUI.ACTION> actionSet = gui.getActionSet();
 
-        // Handle global actions like QUIT
         if (actionSet.contains(GUI.ACTION.QUIT)) {
-            game.setState(null); // Exit the game
-            return; // No need to process further if quitting
+            game.setState(null);
+            return;
         }
 
-        // Delegate action handling to the controller
         controller.step(game, actionSet, time);
 
-        // Render the updated state
         viewer.draw(gui);
     }
 

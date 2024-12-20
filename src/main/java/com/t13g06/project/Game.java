@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 public class Game {
     private final LanternaGUI gui;
     private State state;
-    private final MusicPlayer musicPlayer; // Add MusicPlayer instance
+    private final MusicPlayer musicPlayer;
 
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
@@ -33,8 +33,6 @@ public class Game {
         this.state = new MenuState(new Menu());
 
     }
-
-
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
         new Game().start();

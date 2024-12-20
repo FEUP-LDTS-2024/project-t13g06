@@ -15,7 +15,7 @@ public interface GUI {
 
      Set<ACTION> getActionSet();
 
-     void drawPlayer_1(Position position);
+     void drawPlayer(Position position);
 
     void drawBall(Position position);
 

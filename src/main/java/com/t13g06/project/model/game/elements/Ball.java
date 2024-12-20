@@ -6,35 +6,30 @@ import java.util.TimerTask;
 
 public class Ball extends Element {
     private boolean frozen = false;
-    private boolean isStronger = false; // Flag for stronger ball state
+    private boolean isStronger = false;
+    private int speed = 1;
+    private int xDirection;
+    private int yDirection;
+    private boolean isHit = false;
+    private int blinkCount = 0;
+    private long blinkCooldown = 300;
+    private long lastBlinkTime = 0;
+    private String color = "white";
 
-    private int speed = 1; // Default speed multiplier
-
-    // Direction of the ball
-    private int xDirection; // Horizontal movement direction (-1 or 1)
-    private int yDirection; // Vertical movement direction (-1 or 1)
-
-    // New fields for hit, blinking, and disappearance logic
-    private boolean isHit = false;       // Ball has hit the player
-    private int blinkCount = 0;          // Tracks how many times the ball has blinked
-    private long blinkCooldown = 300;    // Cooldown between blinks (in milliseconds)
-    private long lastBlinkTime = 0;      // Last time the ball toggled color
-    private String color = "white";      // Ball's color (red/white)
-
-    // Constructor to initialize the ball's position and directions
+    // Constructor: Initializes the ball's position and directions
     public Ball(int x, int y) {
         super(x, y);
-        initializeBallDirection(); // Set random initial direction for the ball
+        initializeBallDirection();
     }
 
-    // Method to initialize the ball's random movement direction
+    // Initializes the ball's random movement direction
     public void initializeBallDirection() {
         Random random = new Random();
-        this.xDirection = random.nextBoolean() ? 1 : -1; // Randomly choose left or right
-        this.yDirection = random.nextBoolean() ? 1 : -1; // Randomly choose up or down
+        this.xDirection = random.nextBoolean() ? 1 : -1;
+        this.yDirection = random.nextBoolean() ? 1 : -1;
     }
 
-    // Freeze the ball for a specified duration
+    // Freezes the ball for a specified duration
     public void freeze(int duration) {
         frozen = true;
         new Timer().schedule(new TimerTask() {
@@ -45,96 +40,93 @@ public class Ball extends Element {
         }, duration);
     }
 
-    // Handle the ball hit logic
+    // Handles the ball hit logic
     public void handleHit() {
         this.isHit = true;
-        this.blinkCount = 0; // Reset blink count
+        this.blinkCount = 0;
         this.lastBlinkTime = System.currentTimeMillis();
-        this.color = "red"; // Start with red color
+        this.color = "red";
     }
 
-    // Update the blinking logic
+    // Updates the blinking logic for the ball
     public boolean updateBlinking() {
-        if (!isHit) return false; // Only process blinking when ball is hit
+        if (!isHit) return false;
 
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastBlinkTime >= blinkCooldown) {
-            toggleColor(); // Switch between red and white
+            toggleColor();
             lastBlinkTime = currentTime;
             blinkCount++;
         }
 
-        // If the ball has blinked 4 times (2 red + 2 white), return true to indicate disappearance
         return blinkCount >= 4;
     }
 
-    // Toggle the ball color
+    // Toggles the ball's color between red and white
     private void toggleColor() {
         this.color = this.color.equals("red") ? "white" : "red";
     }
 
-    // Check if the ball is hit
-    public boolean isHit() {
-        return isHit;
-    }
-
-    // Get the ball's current color
-    public String getColor() {
-        return color;
-    }
-    // Method to make the ball stronger
+    // Makes the ball stronger
     public void makeStronger() {
         this.isStronger = true;
     }
 
-    // Method to revert the ball to its normal state
+    // Reverts the ball to its normal state
     public void makeNormal() {
         this.isStronger = false;
     }
 
-    // Method to check if the ball is stronger
-    public boolean isStronger() {
-        return this.isStronger;
-    }
-    // Getters and setters for x and y direction
-    public int getXDirection() {
-        return xDirection;
+    // Increases the ball's speed
+    public void increaseSpeed() {
+        speed = Math.min(speed + 1, 10);
     }
 
-    public void setXDirection(int xDirection) {
-        this.xDirection = xDirection;
+    // Decreases the ball's speed
+    public void decreaseSpeed() {
+        speed = Math.max(speed - 1, 1);
+    }
+
+    // Resets the direction of the ball to a random value
+    public void resetDirection() {
+        initializeBallDirection();
+    }
+
+    // Getter methods
+    public int getXDirection() {
+        return xDirection;
     }
 
     public int getYDirection() {
         return yDirection;
     }
 
-    public void setYDirection(int yDirection) {
-        this.yDirection = yDirection;
-    }
-
-    // Check if the ball is frozen
     public boolean isFrozen() {
         return frozen;
     }
 
-    // Increase ball speed
-    public void increaseSpeed() {
-        speed = Math.min(speed + 1, 10); // Cap speed multiplier at 10x
-    }
-
-    // Decrease ball speed
-    public void decreaseSpeed() {
-        speed = Math.max(speed - 1, 1); // Minimum speed multiplier is 1x
-    }
-
-    // Get the ball's speed multiplier
     public int getSpeed() {
         return speed;
     }
 
-    // Optional: Reset the direction to a random value
-    public void resetDirection() {
-        initializeBallDirection(); // Reset to new random direction
+    public boolean isStronger() {
+        return this.isStronger;
+    }
+
+    public boolean isHit() {
+        return isHit;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    // Setter methods
+    public void setXDirection(int xDirection) {
+        this.xDirection = xDirection;
+    }
+
+    public void setYDirection(int yDirection) {
+        this.yDirection = yDirection;
     }
 }
