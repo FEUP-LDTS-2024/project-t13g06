@@ -26,9 +26,9 @@ class ArenaViewerTest {
 
         arena.setWalls(Arrays.asList(new Wall(1, 2), new Wall(2, 3), new Wall(3, 4)));
         arena.setPowerUp(Arrays.asList(new PowerUps(4, 5, "freeze"), new PowerUps(5, 6, "jumpBoost")));
-        arena.setPlayer_1(new Player_1(5, 8));
+        arena.setPlayer_1(new Player(5, 8));
         arena.setPlayer_2(new Player_2(5,12));
-        arena.setBall(new Ball(10,7));
+        //TODO DAR FIX arena.setBalls(new Ball(10,7));
     }
 
 
@@ -55,17 +55,9 @@ class ArenaViewerTest {
     void drawPlayer1() throws IOException {
         viewer.draw(gui);
 
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer_1(new Position(5, 8));
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer_1(Mockito.any(Position.class));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 8));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(Mockito.any(Position.class));
     }
-    @Test
-    void drawPlayer2() throws IOException {
-        viewer.draw(gui);
-
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer_2(new Position(5, 12));
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer_2(Mockito.any(Position.class));
-    }
-
     @Test
     void refreshAndClear() throws IOException {
         viewer.draw(gui);

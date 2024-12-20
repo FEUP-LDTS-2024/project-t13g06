@@ -53,7 +53,7 @@ class LanternaGUITest {
     void testDrawPlayer1() {
         Position position = new Position(5, 10);
 
-        gui.drawPlayer_1(position);
+        gui.drawPlayer(position);
 
         verify(textGraphicsMock).setForegroundColor(TextColor.Factory.fromString("#FFD700"));
         verify(textGraphicsMock).putString(5, 11, "O");
