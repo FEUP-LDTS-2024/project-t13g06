@@ -1,6 +1,6 @@
-## LDTS_T13_G06 - RETRO LEAGUE
+# LDTS_T13_G06 - RETRO LEAGUE
 
-### Game Description
+## Game Description
 
 The Retro League is a game inspired by the Lethal League game, a 2D arena fighting game. 
 
@@ -18,7 +18,7 @@ for LDTS 2024/2025.
 
 Enjoy playing this game and challenge your friends to beat your survival time, just be careful not to get hit and killed too quickly.
 
-### Implemented Features
+## Implemented Features
 
 - **Playable Character** - the game will has one playable characters that can be controlled by pressing:
     - `LEFT`, `RIGHT` and `UP`
@@ -48,13 +48,13 @@ Enjoy playing this game and challenge your friends to beat your survival time, j
 
 - **Background Music** - the game has background music
 
-### Planned Feautures
+## Planned Feautures
 
 All the features were implemented and completed.
 
-### Design
+## Design
 
-#### General Structure of the code
+### General Structure of the code
 **Problem in context**
 
 With the increase of the complexity of the game, the code will become more difficult to understand and maintain. So, we need to find an appropriate pattern to organize it.
@@ -74,7 +74,7 @@ A modular structure of the code allowing us to divide the code in different file
 - make cooperation easier
 - easily add new features throughout the development stage
 
-#### Game State
+### Game State
 **Problem in context**
 
 It is easy to verify that the whole game has several states, such as the main menu, the game itself, the winner screen, etc. So, the program should be able to handle these states in a simple and efficient way. In addition, we need to easily change the game state when the user interacts with the game. For example, if one of the players dies, the game state should be set to the winner screen.
@@ -87,7 +87,7 @@ The State pattern allows the program to change the behavior of the application d
 
 The game state is defined in the Game class. This is usefull because we can change the state of the game by calling the setState method. The downside is that we need to have access to the Game class context in order to use this method.
 
-#### Factory
+### Factory
 **Problem in context**
 
 The game contains several elements like power-ups that are created in different ways due to their different effects on the player and the ball. Therefore the creation of many power-ups with their type being randomly decided would be much easier if there was a method of identifying each with an id and creating through it.
@@ -104,11 +104,11 @@ This method allows us to reuse construction code when creating multiple power-up
 
 We have fixed all the code smells identified.
 
-### Testing
+## Testing
 
 ---
 
-### Self-evaluation
+## Self-evaluation
 
 The work was divided in a mutual way and we all contributed to garantee the end result was the best one possible.
 
