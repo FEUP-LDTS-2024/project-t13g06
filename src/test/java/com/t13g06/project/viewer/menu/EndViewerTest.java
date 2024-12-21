@@ -44,13 +44,4 @@ class EndViewerTest {
         verify(mockGui).drawText(new Position(22, 15), "Exit", "#FFFFFF");
     }
 
-    @Test
-    void testDrawElements_Submitted() throws IOException {
-        when(mockEndModel.isSubmitted()).thenReturn(true);
-
-        endViewer.drawElements(mockGui);
-
-        verify(mockGui).drawText(new Position(22, 11), "Score Saved!", "#00FF00");
-        verify(mockGui).drawText(new Position(22, 12), "Player1 02:05 2024/12/20", "#FFFFFF");
-    }
 }

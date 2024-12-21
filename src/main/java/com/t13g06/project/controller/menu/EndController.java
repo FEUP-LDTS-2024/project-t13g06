@@ -43,7 +43,7 @@ public class EndController extends Controller<End> {
                 case SELECT:
                     if (getModel().isSelectedSubmit()) {
                         getModel().setSubmitted();
-                        saveScore(getModel().getPlayerName(), gameDuration);
+                        saveScore(getModel().getPlayerName(), getModel().getGameTime());
                     }
 
                     if (getModel().isSelectedEnd()) game.setState(new MenuState(new Menu()));
@@ -68,7 +68,7 @@ public class EndController extends Controller<End> {
 
     // Saves the player's score to a leaderboard file.
     private void saveScore(String playerName, long gameDuration) {
-        long elapsedTimeInSeconds = gameDuration / 1000;
+        long elapsedTimeInSeconds = gameDuration;
         long minutes = elapsedTimeInSeconds / 60;
         long seconds = elapsedTimeInSeconds % 60;
 
@@ -78,8 +78,7 @@ public class EndController extends Controller<End> {
         String formattedScore = String.format("%s %02d:%02d %s", playerName, minutes, seconds, currentDate);
         System.out.println("Writing to file: " + formattedScore);
 
-        // TEMPORARIAMENTE ASSIM POIS O WRITE ESTA A ESCREVER NO CAMINHO DO BUILD EM VEZ DO SRC
-        String logFilePath = "/home/ash/Documents/Projetos/LDTS/ProjetoLDTS/project-t13g06/src/main/resources/leaderboard/gameLog.txt";
+        String logFilePath = "src/main/resources/leaderboard/gameLog.txt";
 
         try {
             File file = new File(logFilePath);

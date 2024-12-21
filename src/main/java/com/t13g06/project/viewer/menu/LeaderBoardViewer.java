@@ -60,7 +60,6 @@ public class LeaderBoardViewer extends Viewer<LeaderBoard> {
                 throw new IOException("File not found: " + logFilePath);
             }
 
-            // Read all lines into a list
             List<String> leaderboardEntries = new ArrayList<>();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                 String line;
@@ -69,19 +68,26 @@ public class LeaderBoardViewer extends Viewer<LeaderBoard> {
                 }
             }
 
-            // Sort the entries in descending order based on the score (assumed to be in the second part of the line)
-            leaderboardEntries.sort((entry1, entry2) -> {
-                String[] parts1 = entry1.split(" ", 2);
-                String[] parts2 = entry2.split(" ", 2);
-                try {
-                    // Extract and compare the scores (assuming the score is the second part of the line)
-                    int score1 = Integer.parseInt(parts1[1].trim());
-                    int score2 = Integer.parseInt(parts2[1].trim());
-                    return Integer.compare(score2, score1); // Sort in descending order
-                } catch (NumberFormatException e) {
-                    return 0; // If there is a parsing error, do not change the order
+            for (int i = 0; i < leaderboardEntries.size() - 1; i++) {
+                for (int j = 0; j < leaderboardEntries.size() - i - 1; j++) {
+
+                    String parts1 = leaderboardEntries.get(j).split(" ", 2)[1].split(" ",2)[0];
+                    String parts2 = leaderboardEntries.get(j + 1).split(" ", 2)[1].split(" ",2)[0];
+
+                    try {
+                        int time1 = parseTimeToSeconds(parts1);
+                        int time2 = parseTimeToSeconds(parts2);
+
+                        if (time1 < time2) {
+                            String temp = leaderboardEntries.get(j);
+                            leaderboardEntries.set(j, leaderboardEntries.get(j + 1));
+                            leaderboardEntries.set(j + 1, temp);
+                        }
+                    } catch (Exception e) {
+                        // If parsing fails, skip this comparison
+                    }
                 }
-            });
+            }
 
             // Display the top 10 entries
             for (int i = 0; i < Math.min(10, leaderboardEntries.size()); i++) {
@@ -95,12 +101,22 @@ public class LeaderBoardViewer extends Viewer<LeaderBoard> {
                 gui.drawText(
                         new Position(28, 5 + i),
                         formattedName + " " + rest,
-                        "#FFFFFF" // White text for leaderboard entries
+                        "#FFFFFF"
                 );
             }
         } catch (IOException e) {
-            e.printStackTrace(); // Log file reading errors
+            throw new RuntimeException(e);
         }
     }
 
+    private static int parseTimeToSeconds(String timeString) throws IllegalArgumentException {
+        String[] timeParts = timeString.split(":");
+        if (timeParts.length != 2) {
+            throw new IllegalArgumentException("Invalid time format: " + timeString);
+        }
+
+        int minutes = Integer.parseInt(timeParts[0].trim());
+        int seconds = Integer.parseInt(timeParts[1].trim());
+        return (minutes * 60) + seconds;
+    }
 }
