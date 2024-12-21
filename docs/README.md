@@ -1,6 +1,6 @@
-# LDTS_T13_G06 - RETRO LEAGUE
+## LDTS_T13_G06 - RETRO LEAGUE
 
-## Game Description
+### Game Description
 
 The Retro League is a game inspired by the Lethal League game, a 2D arena fighting game. 
 
@@ -18,7 +18,7 @@ for LDTS 2024/2025.
 
 Enjoy playing this game and challenge your friends to beat your survival time, just be careful not to get hit and killed too quickly.
 
-## Implemented Features
+### Implemented Features
 
 - **Playable Character** - the game will has one playable characters that can be controlled by pressing:
     - `LEFT`, `RIGHT` and `UP`
@@ -46,72 +46,15 @@ Enjoy playing this game and challenge your friends to beat your survival time, j
 
   being able to change the odds of the game if chosen correctly
 
-- **Background Music** - the game will has background music
+- **Background Music** - the game has background music
 
-## Planned Feautures
+### Planned Feautures
 
-All the features were completed.
+All the features were implemented and completed.
 
--------
-## Mockups
-The following mockups ilustrate how we idealize the game's different menus and the game's arena as well as details like the two characters and the power-ups:
+### Design
 
-### Main Menu
-(with `PLAY` selected)
-
-![Captura de ecrã 2024-11-24 134914](https://github.com/user-attachments/assets/8ee3f088-fb67-4ed6-9e8a-da79707a4c64)
-
-(with `SETTINGS` selected)
-
-![Captura de ecrã 2024-11-24 134933](https://github.com/user-attachments/assets/28171de5-7ee7-41cd-a6ae-df3781f57585)
-
-### Settings Menu
-(with `SOUND EFFECTS VOLUME` selected)
-
-![Captura de ecrã 2024-11-24 225402](https://github.com/user-attachments/assets/37b2a0d8-7555-48ef-a621-f73fc677815f)
-
-(with `MUSIC VOLUME` selected)
-
-![Captura de ecrã 2024-11-24 225422](https://github.com/user-attachments/assets/509df3d8-1ffa-47d7-981d-3c84aa5b41fe)
-
-## Pause Screen
-(with `RESUME` selected)
-
-![Captura de ecrã 2024-11-25 093024](https://github.com/user-attachments/assets/bd047735-9fe9-4015-b00c-54d361262a6e)
-
-(with `RESTART` selected)
-
-![Captura de ecrã 2024-11-25 092648](https://github.com/user-attachments/assets/062eced7-2631-4c90-a50d-a23fe08584de)
-
-(with `EXIT` selected)
-
-![Captura de ecrã 2024-11-25 092732](https://github.com/user-attachments/assets/34d6bf4e-3184-4350-9a5b-f9acf51f3c2d)
-
-(with `SETTINGS` selected)
-
-![Captura de ecrã 2024-11-25 092835](https://github.com/user-attachments/assets/9ed52d1e-8bbf-492a-bb34-2fede53f79d0)
-
-## Winner Screen
-(when player1 wins)
-
-![Captura de ecrã 2024-11-25 094452](https://github.com/user-attachments/assets/ab97f7e0-ebf9-41e0-9c26-2484294a99c0)
-
-(when player2 wins)
-
-![Captura de ecrã 2024-11-25 095331](https://github.com/user-attachments/assets/b3e0bab5-27e5-4c0e-a1c5-c03476d3a2a9)
-
-### Main Arena
-(including **characters** and **power-ups**)
-
-![Captura de ecrã 2024-11-24 210633](https://github.com/user-attachments/assets/5b6d9a51-b010-4263-9d40-2499d391861d)
-
-## UML
-
-![UML_retro_league](https://github.com/user-attachments/assets/5c7596d5-8c46-4972-8c3f-f4ba1a81e961)
-
-## Design
-
-### General Structure of the code
+#### General Structure of the code
 **Problem in context**
 
 With the increase of the complexity of the game, the code will become more difficult to understand and maintain. So, we need to find an appropriate pattern to organize it.
@@ -131,7 +74,7 @@ A modular structure of the code allowing us to divide the code in different file
 - make cooperation easier
 - easily add new features throughout the development stage
 
-### Game State
+#### Game State
 **Problem in context**
 
 It is easy to verify that the whole game has several states, such as the main menu, the game itself, the winner screen, etc. So, the program should be able to handle these states in a simple and efficient way. In addition, we need to easily change the game state when the user interacts with the game. For example, if one of the players dies, the game state should be set to the winner screen.
@@ -144,7 +87,7 @@ The State pattern allows the program to change the behavior of the application d
 
 The game state is defined in the Game class. This is usefull because we can change the state of the game by calling the setState method. The downside is that we need to have access to the Game class context in order to use this method.
 
-### Factory
+#### Factory
 **Problem in context**
 
 The game contains several elements like power-ups that are created in different ways due to their different effects on the player and the ball. Therefore the creation of many power-ups with their type being randomly decided would be much easier if there was a method of identifying each with an id and creating through it.
@@ -157,3 +100,18 @@ Factory Method defines an interface for creating an object, but lets subclasses 
 
 This method allows us to reuse construction code when creating multiple power-ups or different elements making it easier to, for example, introduce new power-ups or walls or even players (if we changeed the game for more than two players) without breaking the current implemented code
 
+### Code Smells
+
+We have fixed all the code smells identified.
+
+### Testing
+
+---
+
+### Self-evaluation
+
+The work was divided in a mutual way and we all contributed to garantee the end result was the best one possible.
+
+- Afonso Saraiva: 33,3%
+- Daniel Marques: 33,3%
+- Inês Francisco: 33,3%
