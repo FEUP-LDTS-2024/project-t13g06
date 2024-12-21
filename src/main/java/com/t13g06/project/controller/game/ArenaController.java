@@ -72,4 +72,24 @@ public class ArenaController extends GameController {
         powerUpController.step(game, actionSet, time);
         handleBallSpawning();
     }
+
+    public BallController getBallController() {
+        return ballController;
+    }
+
+    public PlayerController getPlayer_1_controller() {
+        return player_1_controller;
+    }
+
+    public PowerUpController getPowerUpController() {
+        return powerUpController;
+    }
+
+    public long getLastSpawnTime() {
+        return lastSpawnTime;
+    }
+
+    public int getIterations() {
+        return iterations;
+    }
 }

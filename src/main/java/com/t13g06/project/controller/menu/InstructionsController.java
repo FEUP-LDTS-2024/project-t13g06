@@ -27,7 +27,7 @@ public class InstructionsController extends Controller<Instructions> {
             switch (action) {
 
                 case SELECT:
-                    if (getModel().isSelectedSettings()) game.setState(new MenuState(new Menu()));
+                    if (getModel().isSelectedInstructions()) game.setState(new MenuState(new Menu()));
                     break;
 
                 default:

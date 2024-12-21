@@ -28,7 +28,7 @@ public class InstructionsTest {
     }
 
     @Test
-    public void testIsSelectedSettings() {
-        assertTrue(instructions.isSelectedSettings());
+    public void testIsSelectedInstructions() {
+        assertTrue(instructions.isSelectedInstructions());
     }
 }
