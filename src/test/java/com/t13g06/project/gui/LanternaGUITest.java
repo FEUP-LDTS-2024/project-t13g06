@@ -6,8 +6,10 @@ import com.t13g06.project.model.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.Set;
 
@@ -33,6 +35,77 @@ class LanternaGUITest {
         Set<GUI.ACTION> actions = gui.getActionSet();
         assertNotNull(actions);
         assertTrue(actions.isEmpty());
+    }
+
+    @Test
+    void testGetNextAction_containsQuit() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.QUIT);
+        assertEquals(GUI.ACTION.QUIT, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsUp() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.UP);
+        assertEquals(GUI.ACTION.UP, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsDown() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.DOWN);
+        assertEquals(GUI.ACTION.DOWN, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsLeft() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.LEFT);
+        assertEquals(GUI.ACTION.LEFT, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsRight() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.RIGHT);
+        assertEquals(GUI.ACTION.RIGHT, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsSelect() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.SELECT);
+        assertEquals(GUI.ACTION.SELECT, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsBackspace() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.BACKSPACE);
+        assertEquals(GUI.ACTION.BACKSPACE, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextAction_containsType() throws IOException {
+        Set<GUI.ACTION> actions = gui.getActionSet();
+        assertNotNull(actions);
+        actions.add(GUI.ACTION.TYPE);
+        assertEquals(GUI.ACTION.TYPE, gui.getNextAction());
+    }
+
+    @Test
+    void testGetNextActionEmptySet() throws IOException {
+        GUI.ACTION actions = gui.getNextAction();
+        assertNotNull(actions);
+        assertEquals(GUI.ACTION.NONE, actions);
     }
 
     @Test
@@ -90,20 +163,30 @@ class LanternaGUITest {
 
     @Test
     void testGetLastCharacterPressed() {
-        assertEquals("", gui.getLastCharacterPressed());
+        String characterPressed = "A";
+        gui.setLastCharacterPressed(characterPressed);
+        assertEquals("A", gui.getLastCharacterPressed());
         assertEquals("", gui.getLastCharacterPressed());
     }
 
-    @Test
-    void testGetNextActionEmptySet() throws IOException {
-        GUI.ACTION action = gui.getNextAction();
-        assertEquals(GUI.ACTION.NONE, action);
-    }
 
     @Test
-    void testGetNextActionQuit() throws IOException {
-        gui.getActionSet().add(GUI.ACTION.QUIT);
-        GUI.ACTION action = gui.getNextAction();
-        assertEquals(GUI.ACTION.QUIT, action);
+    void testDrawCharacterImage() throws IOException {
+        Position position = new Position(10, 10);
+
+        String imagePath = "src/test/resources/images/GameBackground.png";
+
+        File imageFile = new File(imagePath);
+        BufferedImage image = ImageIO.read(imageFile);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ImageIO.write(image, "PNG", byteArrayOutputStream);
+        InputStream imageStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+
+        int targetWidth = 50;
+        int targetHeight = 50;
+
+        gui.drawCharacterImage(position, imageStream, targetWidth, targetHeight);
+        assertDoesNotThrow(() -> gui.refresh());
     }
 }

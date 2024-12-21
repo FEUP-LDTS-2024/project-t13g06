@@ -37,7 +37,11 @@ class GameViewerTest {
 
         gameViewer.drawElements(guiMock);
 
-        verify(guiMock, atLeastOnce()).drawText(any(), any(), any());
         verify(guiMock, atLeastOnce()).drawCharacterImage(any(), any(), anyInt(), anyInt());
+
+        verify(guiMock, atLeastOnce()).drawText(any(), any(), any());
+
+        verify(guiMock, atLeastOnce()).drawCharacterImage(any(), any(), anyInt(), anyInt());
+        verify(guiMock, atLeastOnce()).drawText(any(), any(), any());
     }
 }
