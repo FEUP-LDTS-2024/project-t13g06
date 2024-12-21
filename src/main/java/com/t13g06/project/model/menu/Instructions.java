@@ -18,11 +18,12 @@ public class Instructions {
 
     public boolean isSelected(int i) { return currentEntry == i; }
 
-    public boolean isSelectedSettings() {
+    public boolean isSelectedInstructions() {
         return isSelected(0);
     }
 
     public int getNumberEntries() {
         return this.entries.size();
     }
+
 }
