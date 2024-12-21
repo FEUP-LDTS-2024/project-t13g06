@@ -43,5 +43,4 @@ class EndViewerTest {
         verify(mockGui).drawText(new Position(22, 14), "Option 2", "#FFD700");
         verify(mockGui).drawText(new Position(22, 15), "Exit", "#FFFFFF");
     }
-
 }
