@@ -33,7 +33,7 @@ public class InstructionsViewer extends Viewer<Instructions> {
         gui.drawText(new Position(4, 11), "AVOID GETTING HIT BY THE BALLs;", "#FFFFFF");
         gui.drawText(new Position(4, 12), "Be agile and SMART WHEN CHOOSING A POWER", "#FFFFFF");
         // Power-Ups icons
-        gui.drawText(new Position(4, 14), "LIST OF POWER-UPS:", "#FF00FF");
+        gui.drawText(new Position(4, 14), "LIST OF POWER UPS:", "#FF00FF");
 
         gui.drawText(new Position(5, 15), "%", "#00CCFF");
         gui.drawText(new Position(5, 16), "$", "#FF9900");
@@ -42,8 +42,8 @@ public class InstructionsViewer extends Viewer<Instructions> {
         gui.drawText(new Position(5, 19), ">", "#FF0000");
         // Power-ups explanation
         gui.drawText(new Position(6, 15), " : BALL FREEZE", "#FFFFFF");
-        gui.drawText(new Position(6, 16), " : BALL SPEED-UP", "#FFFFFF");
-        gui.drawText(new Position(6, 17), " : BALL SLOWNESS", "#FFFFFF");
+        gui.drawText(new Position(6, 16), " : BALL SPEED UP", "#FFFFFF");
+        gui.drawText(new Position(6, 17), " : BALL SLOW DOWN", "#FFFFFF");
         gui.drawText(new Position(6, 18), " : JUMP BOOST", "#FFFFFF");
         gui.drawText(new Position(6, 19), " : STRONGER BALL", "#FFFFFF");
 
