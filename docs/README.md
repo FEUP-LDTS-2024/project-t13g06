@@ -72,7 +72,7 @@ This pattern was useful because it allowed us to divide the code in three parts,
   All three parts are independent and work together to make the game work as follows:
 
 <p align="center" justify="center">
-  <img src="images/UML/MVC.png"/>
+  <img src="images/uml/MVC.png" width="400" height="200"/>
 </p>
 <p align="center">
   <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
@@ -100,7 +100,7 @@ The State pattern is a behavioral design pattern that allows an object to change
 This way, the different states of our program allowed the game to alter its behavior in a simple and efficient way, and were implemented in the following manner:
 
 <p align="center" justify="center">
-  <img src="images/UML/state.png"/>
+  <img src="images/uml/state.png"/>
 </p>
 <p align="center">
   <b><i>Fig 2. State pattern design</i></b>
@@ -126,7 +126,7 @@ The Factory Method is a creational design that defines an interface for creating
 A factory is responsible for constructing the whole but the workers are the ones that actually execute the job. Bringing this into the program's context, our Element class works as the factory, being able to construct the game's different objects specified above, and its subclasses represent the workers which can supply the necessary component to well define the objects various characteristics.
 
 <p align="center" justify="center">
-  <img src="images/UML/Element.png"/>
+  <img src="images/uml/factory.png" width="500" height="200"/>
 </p>
 <p align="center">
   <b><i>Fig 3. Factory pattern design</i></b>
@@ -134,7 +134,9 @@ A factory is responsible for constructing the whole but the workers are the ones
 
 **Consequences**
 
-This method allows us to reuse construction code when creating multiple power-ups or different elements making it easier to, for example, introduce new elements (if we changeed the game for two players) without breaking the current implemented code
+This method brings benefits as it:
+- allows us to reuse construction code when creating multiple power-ups or different elements
+- makes it easier to, for example, introduce new elements (if we changeed the game for two players) without breaking the current implemented code
 
 ### Code Smells
 
