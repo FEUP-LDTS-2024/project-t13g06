@@ -106,7 +106,17 @@ We have fixed all the code smells identified.
 
 ## Testing
 
----
+### Screenshot of coverage report
+
+<p align="center" justify="center">
+  <img src="images/screenshots/coverageTest.JPG"/>
+</p>
+<p align="center">
+  <b><i>Fig 1. Code coverage screenshot</i></b>
+</p>
+
+### Link to mutation testing report
+[Mutation tests](../build/reports/pitest/index.html)
 
 ## Self-evaluation
 
