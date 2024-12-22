@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ArenaTest {
     private Arena arena;
@@ -74,4 +75,28 @@ public class ArenaTest {
         assertTrue(arena.isEmpty(pos));
         assertNotEquals(pos, player.getPosition());
     }
+
+    @Test
+    public void testGetPowerUps() {
+        List<PowerUps> expectedPowerUps = Arrays.asList(powerUp);
+
+        List<PowerUps> actualPowerUps = arena.getPowerUp();
+
+        assertNotNull(actualPowerUps);
+        assertEquals(expectedPowerUps.size(), actualPowerUps.size());
+        assertTrue(actualPowerUps.containsAll(expectedPowerUps));
+    }
+
+    @Test
+    public void testGetWalls() {
+        List<Wall> expectedWalls = Arrays.asList(wall);
+
+        List<Wall> actualWalls = arena.getWalls();
+
+        assertNotNull(actualWalls);
+        assertEquals(expectedWalls.size(), actualWalls.size());
+        assertTrue(actualWalls.containsAll(expectedWalls));
+    }
+
+
 }

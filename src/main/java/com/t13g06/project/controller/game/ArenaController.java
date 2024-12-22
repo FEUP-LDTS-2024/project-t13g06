@@ -85,10 +85,6 @@ public class ArenaController extends GameController {
         return powerUpController;
     }
 
-    public long getLastSpawnTime() {
-        return lastSpawnTime;
-    }
-
     public int getIterations() {
         return iterations;
     }

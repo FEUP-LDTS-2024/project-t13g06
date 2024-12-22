@@ -2,6 +2,7 @@ package com.t13g06.project.model.game.elements;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +20,13 @@ class BallTest {
         ball.initializeBallDirection();
         assertTrue(ball.getXDirection() == 1 || ball.getXDirection() == -1);
         assertTrue(ball.getYDirection() == 1 || ball.getYDirection() == -1);
+    }
+
+    @Test
+    void testResetDirection() {
+        Ball mockball = Mockito.spy(new Ball(1,1));
+        mockball.resetDirection();
+        Mockito.verify(mockball, Mockito.times(1)).initializeBallDirection();
     }
 
     @Test
@@ -72,6 +80,13 @@ class BallTest {
     void testDecreaseSpeed() {
         ball.decreaseSpeed();
         assertEquals(1, ball.getSpeed());
+    }
+
+    @Test
+    void testIsHit() {
+        assertFalse(ball.isHit());
+        ball.setHit(true);
+        assertTrue(ball.isHit());
     }
 
     @Test

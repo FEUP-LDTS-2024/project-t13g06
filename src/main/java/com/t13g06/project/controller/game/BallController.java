@@ -109,8 +109,4 @@ public class BallController extends GameController {
             game.setState(new EndState(new End(elapsedTime), elapsedTime));
         }
     }
-
-    public Boolean getLostGame() {
-        return lostGame;
-    }
 }

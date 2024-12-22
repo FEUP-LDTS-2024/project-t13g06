@@ -279,4 +279,8 @@ public class LanternaGUI implements GUI {
             }
         }
     }
+
+    public void setLastCharacterPressed(String characterPressed) {
+        this.lastCharacterPressed = characterPressed;
+    }
 }
