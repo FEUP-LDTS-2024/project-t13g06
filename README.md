@@ -34,11 +34,28 @@ The following screenshots ilustrate the game's general look, including the diffe
 
 ### Game Preview
 
+<p align="center" justify="center">
+  <img src="docs/gifs/gamePreview.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 1. Sneak peak into Retro League game</i></b>
+</p>
+<br>
+<br />
 
 ### Menus
 
 <p align="center" justify="center">
-  <img src="docs/images/instructionsMenu.png"/>
+  <img src="docs/gifs/mainMenu.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 2. Main Menu</i></b>
+</p>
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/images/instructionsMenu.png" width="800" height="500"/>
 </p>
 <p align="center">
   <b><i>Fig 2. Instructions Menu </i></b>  
@@ -48,7 +65,7 @@ The following screenshots ilustrate the game's general look, including the diffe
 <br />
 
 <p align="center" justify="center">
-  <img src="docs/images/leaderboardMenu.png"/>
+  <img src="docs/images/leaderboardMenu.png" width="800" height="500"/>
 </p>
 <p align="center">
   <b><i>Fig 3. Leaderboard Menu </i></b>
@@ -56,9 +73,103 @@ The following screenshots ilustrate the game's general look, including the diffe
 
 ### Power-ups
 
+<p align="center" justify="center">
+  <img src="docs/gifs/freeze.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 3. Freeze ball</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/speedUp.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 4. Speed Up ball</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/slowDown.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 5. Slow down ball</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/jumpBoost.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 6. Player's jump boost</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/doubleDamage.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 7. Double damage ball</i></b>
+</p>
+
+<br>
+<br />
 
 ### Animations
 
+<p align="center" justify="center">
+  <img src="docs/gifs/lives.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 8. Player lives' tracker</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/survivalTime.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 9. Survival Timer</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/ballCountdown.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 10. Countdown to new ball</i></b>
+</p>
+
+<br>
+<br />
+
+<p align="center" justify="center">
+  <img src="docs/gifs/savingScore.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 11. Saving survival time</i></b>
+</p>
+
+<br>
+<br />
 
 ### End Game
 
+<p align="center" justify="center">
+  <img src="docs/gifs/endGame.gif"/>
+</p>
+<p align="center">
+  <b><i>Gif 12. End Game</i></b>
+</p>
