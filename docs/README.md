@@ -117,7 +117,7 @@ Our game opens in full screen everytime which is a problem since, opening the te
 </p>
 
 ### Link to mutation testing report
-[Mutation tests](../build/reports/pitest/index.html)
+[Mutation tests](../docs/pitest/index.html)
 
 ## Self-evaluation
 
