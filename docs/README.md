@@ -57,48 +57,84 @@ All the features were implemented and completed.
 ### General Structure of the code
 **Problem in context**
 
-With the increase of the complexity of the game, the code will become more difficult to understand and maintain. So, we need to find an appropriate pattern to organize it.
+With the increase of the complexity of the game, the code became more difficult to understand and maintain. So, we needed to find an appropriate pattern to organize it.
 
 **The Pattern**
 
-The main pattern applied to the project is the Architectural Pattern, more specifically the Model-View-Controller style which is commonly used in a GUI. This pattern is useful because it divides the code in three parts: model, view and controller. 
-- The model part is responsible for the dataT
-- he view part is responsible for the visual interface
-- The controller part for the logic of the game.
+The main pattern applied to the project is the Architectural Pattern, more specifically the Model-View-Controller style which is commonly used in a GUI. 
 
-  All the three packages are independent and work together to make the game work.
+**Implementation**
+This pattern was useful because it allowed us to divide the code in three parts, or class groups: model, view and controller. 
+- The model classes are responsible for the data storage
+- The view classes control the visual interface and, therefore, the visual effects on the screen
+- The controller classes are responsible for the logic of the game
+
+  All three parts are independent and work together to make the game work as follows:
+
+<p align="center" justify="center">
+  <img src="images/UML/MVC.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 1. Model, Controller and Viewer pattern design</i></b>
+</p>
+
 
 **Consequences**
 
-A modular structure of the code allowing us to divide the code in different files can be very usefull for many reasons, but it can also not be an easy task to do. This means that when we are developing the code we need to think about the structure of the code and how we are going to divide it. This is, in fact, a problem for people who aren't used to work with this kind of structure. However, as the times goes on we will get used to it and benefit from it being able to:
+A modular structure of the code allowing us to divide the code in different files can be very usefull for many reasons, but it can also not be an easy task to do. This meant that when we were developing the code we needed to think about the structure of the code and how we were going to divide it. This was, in fact, a hard task at the beginning. However, as the times went on we were able to get used to it and benefit from it, being able to:
 - make cooperation easier
+- well organize our code
 - easily add new features throughout the development stage
 
 ### Game State
 **Problem in context**
 
-It is easy to verify that the whole game has several states, such as the main menu, the game itself, the winner screen, etc. So, the program should be able to handle these states in a simple and efficient way. In addition, we need to easily change the game state when the user interacts with the game. For example, if one of the players dies, the game state should be set to the winner screen.
+It is easy to verify that the whole game has several states, such as the main menu, the game itself, the end game screen, etc. So, the program needed to be able to handle these states in a simple and efficient way. In addition, we needed to easily change the game state when the user interacted with the game. For example, if the players dies, the game state is set to the end game screen.
 
 **The Pattern**
 
-The State pattern allows the program to change the behavior of the application depending on the current state.
+The State pattern is a behavioral design pattern that allows an object to change its behavior depending on its current state and when its internal state was altered.
+
+**Implementation**
+
+This way, the different states of our program allowed the game to alter its behavior in a simple and efficient way, and were implemented in the following manner:
+
+<p align="center" justify="center">
+  <img src="images/UML/state.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 2. State pattern design</i></b>
+</p>
 
 **Consequences**
 
-The game state is defined in the Game class. This is usefull because we can change the state of the game by calling the setState method. The downside is that we need to have access to the Game class context in order to use this method.
+The game state is defined in the Game class which is usefull since:
+- we can change the state of the game by calling the setState method
+- the different states are explicit and there is no need to rely on a series of flags
 
 ### Factory
 **Problem in context**
 
-The game contains several elements like power-ups that are created in different ways due to their different effects on the player and the ball. Therefore the creation of many power-ups with their type being randomly decided would be much easier if there was a method of identifying each with an id and creating through it.
+The game contains an aglomeration of elements such as a player, a ball and power-ups that have different effects on the player and ball. This way having a design pattern that allows us to create specific elements through a generalized class is way more effective than creating a different class for each element.
 
 **The Pattern**
 
-Factory Method defines an interface for creating an object, but lets subclasses decide which class to instantiate.
+The Factory Method is a creational design that defines an interface for creating objects in a superclass, but lets subclasses decide which class to instantiate, or, in other words, alter the type of objects that will be created.
+
+**Implementation**
+
+A factory is responsible for constructing the whole but the workers are the ones that actually execute the job. Bringing this into the program's context, our Element class works as the factory, being able to construct the game's different objects specified above, and its subclasses represent the workers which can supply the necessary component to well define the objects various characteristics.
+
+<p align="center" justify="center">
+  <img src="images/UML/Element.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 3. Factory pattern design</i></b>
+</p>
 
 **Consequences**
 
-This method allows us to reuse construction code when creating multiple power-ups or different elements making it easier to, for example, introduce new power-ups or walls or even players (if we changeed the game for more than two players) without breaking the current implemented code
+This method allows us to reuse construction code when creating multiple power-ups or different elements making it easier to, for example, introduce new elements (if we changeed the game for two players) without breaking the current implemented code
 
 ### Code Smells
 
@@ -113,7 +149,7 @@ Our game opens in full screen everytime which is a problem since, opening the te
   <img src="images/screenshots/coverageTest.JPG"/>
 </p>
 <p align="center">
-  <b><i>Fig 1. Code coverage screenshot</i></b>
+  <b><i>Fig 4. Code coverage screenshot</i></b>
 </p>
 
 ### Link to mutation testing report
