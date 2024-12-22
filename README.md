@@ -25,15 +25,34 @@ The following screenshots ilustrate the game's general look, including the diffe
 
 ### Game Title
 
+<p align="center" justify="center">
+  <img src="docs/images/gameTitle.png" width="500" height="510"/>
+</p>
+<p align="center">
+  <b><i>Fig 1. Game title</i></b>
+</p>  
 
 ### Game Preview
 
 
 ### Menus
 
+<p align="center" justify="center">
+  <img src="docs/images/instructionsMenu.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 2. Instructions Menu </i></b>  
+</p>  
 
-### Arena
+<br>
+<br />
 
+<p align="center" justify="center">
+  <img src="docs/images/leaderboardMenu.png"/>
+</p>
+<p align="center">
+  <b><i>Fig 3. Leaderboard Menu </i></b>
+</p>
 
 ### Power-ups
 
