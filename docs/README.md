@@ -102,7 +102,8 @@ This method allows us to reuse construction code when creating multiple power-up
 
 ### Code Smells
 
-We have fixed all the code smells identified.
+**Opening Game Terminal**
+Our game opens in full screen everytime which is a problem since, opening the terminal like this, only displays our game correctly in computer screens of size 1920x1280. When the computer's screen is not the one specificated, to correctly view our game, the user will need to reduce the full screen window and change its size until it shows the terminal without visual bugs, displaying then the game correctly.
 
 ## Testing
 
