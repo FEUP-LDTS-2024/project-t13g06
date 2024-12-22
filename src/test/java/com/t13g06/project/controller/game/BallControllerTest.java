@@ -40,7 +40,7 @@ public class BallControllerTest {
     }
 
     @Test
-    public void testMoveBalls_BallHitsWall() {
+    public void testWallCollision() {
         Ball ball = new Ball(1, 1);
         balls.add(ball);
 
@@ -51,6 +51,41 @@ public class BallControllerTest {
         assertEquals(-1, ball.getXDirection());
         assertEquals(0, ball.getPosition().getX());
     }
+
+    @Test
+    public void testBallFrozen() {
+        Ball ball = mock(Ball.class);
+        balls.add(ball);
+
+        when(ball.isFrozen()).thenReturn(true);
+
+        ballController.moveBalls();
+        verify(ball, never()).setPosition(any(Position.class));
+    }
+
+    @Test
+    public void testBallCollision() {
+        Ball mockBall1 = mock(Ball.class);
+        Ball mockBall2 = mock(Ball.class);
+        balls.add(mockBall1);
+        balls.add(mockBall2);
+
+        Position pos1 = new Position(1, 1);
+        Position pos2 = new Position(2, 1);
+
+        when(mockBall1.getPosition()).thenReturn(pos1);
+        when(mockBall2.getPosition()).thenReturn(pos2);
+        when(mockBall1.getXDirection()).thenReturn(1);
+        when(mockBall2.getXDirection()).thenReturn(-1);
+        when(mockArena.isWall(any(Position.class))).thenReturn(false);
+
+        ballController.moveBalls();
+
+        verify(mockBall1, atLeastOnce()).setPosition(any(Position.class));
+        verify(mockBall2, atLeastOnce()).setPosition(any(Position.class));
+    }
+
+
 
     @Test
     public void testStep_NoGameOver() {

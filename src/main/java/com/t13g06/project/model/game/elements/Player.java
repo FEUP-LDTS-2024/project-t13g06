@@ -25,6 +25,8 @@ public class Player extends Element {
         return lives;
     }
 
+    public void setLives(int lives) {this.lives = lives;}
+
     // Reduces the player's lives by a specified amount
     public void loseLife(int amount) {
         this.lives -= amount;

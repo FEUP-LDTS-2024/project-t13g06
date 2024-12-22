@@ -1,11 +1,15 @@
 package com.t13g06.project.controller.game;
 
 import com.t13g06.project.Game;
+import com.t13g06.project.gui.GUI;
 import com.t13g06.project.model.Position;
 import com.t13g06.project.model.game.arena.Arena;
 import com.t13g06.project.model.game.elements.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.Mockito.*;
 
@@ -22,13 +26,12 @@ class PlayerControllerTest {
         mockPlayer = mock(Player.class);
         mockGame = mock(Game.class);
 
-        // Mock player and position setup
         Position initialPosition = new Position(5, 5);
         when(mockPlayer.getPosition()).thenReturn(initialPosition);
         when(mockArena.getPlayer_1()).thenReturn(mockPlayer);
         when(mockArena.isEmpty(any(Position.class))).thenReturn(true);
 
-        playerController = new PlayerController(mockArena);
+        playerController = spy(new PlayerController(mockArena));  // Spy on PlayerController
     }
 
     @Test
@@ -101,5 +104,32 @@ class PlayerControllerTest {
 
         playerController.moveHeroRight();
         verify(mockPlayer, never()).setPosition(rightPosition);
+    }
+
+    @Test
+    void testApplyGravityWhenNotJumpingAndEmptyBelow() {
+        Position currentPosition = new Position(5, 5);
+        Position belowPosition = new Position(5, 6);
+        when(mockPlayer.getPosition()).thenReturn(currentPosition);
+        when(mockArena.isEmpty(belowPosition)).thenReturn(true);
+        when(mockPlayer.isJumping()).thenReturn(false);
+        when(mockPlayer.getVerticalSpeed()).thenReturn(0.0);
+
+        playerController.applyGravity();
+
+        verify(mockPlayer).setVerticalSpeed(0.5);
+        verify(mockPlayer).setPosition(new Position(5, 6));
+    }
+
+    @Test
+    void testStepWithActions() {
+        Set<GUI.ACTION> actionSet = new HashSet<>();
+        actionSet.add(GUI.ACTION.LEFT);
+        actionSet.add(GUI.ACTION.UP);
+
+        playerController.step(mockGame, actionSet, 1000L);
+
+        verify(playerController).applyGravity();
+        verify(mockPlayer).setPosition(new Position(4, 5));
     }
 }
