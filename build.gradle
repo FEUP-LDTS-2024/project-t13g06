@@ -11,7 +11,8 @@ pitest {
     junit5PluginVersion = '1.0.0'
     verbose = true
     excludedClasses = ['com.t13g06.project.audio.*', 'com.t13g06.project.gui.GUI',
-                        'com.t13g06.project.Game', 'com.t13g06.project.viewer.game.GameViewer']
+                        'com.t13g06.project.Game', 'com.t13g06.project.viewer.game.GameViewer',
+                        'com.t13g06.project.model.game.arena.ArenaBuilder']
 }
 
 group = 'com.t13g06.project'

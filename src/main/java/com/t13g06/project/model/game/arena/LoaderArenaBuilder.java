@@ -18,6 +18,9 @@ public class LoaderArenaBuilder extends ArenaBuilder {
         this.level = level;
 
         URL resource = LoaderArenaBuilder.class.getResource("/arenas/arena" + level + ".lvl");
+        if (resource == null) {
+            throw new IOException("Resource not found");
+        }
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         lines = readLines(br);
