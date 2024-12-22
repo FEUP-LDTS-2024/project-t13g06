@@ -22,6 +22,7 @@ public class Ball extends Element {
         initializeBallDirection();
     }
 
+
     // Initializes the ball's random movement direction
     public void initializeBallDirection() {
         Random random = new Random();
@@ -46,25 +47,6 @@ public class Ball extends Element {
         this.blinkCount = 0;
         this.lastBlinkTime = System.currentTimeMillis();
         this.color = "red";
-    }
-
-    // Updates the blinking logic for the ball
-    public boolean updateBlinking() {
-        if (!isHit) return false;
-
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastBlinkTime >= blinkCooldown) {
-            toggleColor();
-            lastBlinkTime = currentTime;
-            blinkCount++;
-        }
-
-        return blinkCount >= 4;
-    }
-
-    // Toggles the ball's color between red and white
-    private void toggleColor() {
-        this.color = this.color.equals("red") ? "white" : "red";
     }
 
     // Makes the ball stronger
@@ -115,6 +97,10 @@ public class Ball extends Element {
 
     public boolean isHit() {
         return isHit;
+    }
+
+    public void setHit(boolean hit) {
+        isHit = hit;
     }
 
     public String getColor() {
